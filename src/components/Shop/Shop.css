@@ -1,0 +1,40 @@
+.shop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFD196;
+    height: 100vh;
+}
+
+.shop-header {
+    position: relative;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 5% 10% 15%;
+    margin: 10px 0 0 0;
+    border-radius: 40px;
+}
+
+.shop-header {
+    background: 50% 60% gold url("https://cdn.dribbble.com/users/2598141/screenshots/14583810/media/489284a3862e2728949745cbefb191a6.png") no-repeat;
+}
+
+.shop-header__title {
+    position: absolute;
+    font-size: 50px;
+}
+
+.shop-header__search-shoes {
+    position: absolute;
+    right: 50px;
+    height: 33px;
+    width: 270px;
+    border-radius: 5px;
+    border: none;
+    background-color: #F8D4BD;
+    font-size: 30px;
+    padding: 5px;
+}

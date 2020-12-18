@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Shop.css';
 import './Shoe/Shoe.css';
 import Shoe from "./Shoe/Shoe";
+import {products as prodArray} from "../App/App";
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(prodArray);
     const [list, setList] = useState([]);
 
-    useEffect(() => {
+//something wrong with API, maybe will try it later
+    /* useEffect(() => {
         async function shoesRequest() {
             const response = await fetch('https://shoe-catalogue-api-codex.herokuapp.com/api/shoes', {mode: 'cors'});
             response.json().then((response) => {
@@ -19,26 +21,19 @@ const Shop = () => {
                 })
         }
         shoesRequest()
-    }, [])
+    }, []) */
 
     useEffect(() => {
 
             const renderedItems = products.map(item => {
                 return (
-                    <div key={item._id} className="product">
-                        <div className="shoe-back">
-
-                        </div>
-                        <img  className="shoe-pic" alt={item.brand} src="https://lh3.googleusercontent.com/proxy/kpjXu__Z3KFuL11pzwUCyK0sNSSGlxMMhH4bvT3nCaVyxZlGJWD8_oJiOGN9BE6ssFffMaKBvfdX9UjBaPyUiBof-GO40VXISG5zadZBOLwMpRGBYIAo7cxdRo4ha_o1OcJANI4bfGFObYi1UajX5ochVTs38zPsetI" />
-                        <p>{item.brand}</p>
-                        <p>{item.price}</p>
-                    </div>
+                   <Shoe price={item.price} title={item.title} img={item.image}/>
                 )
             })
 
             setList(renderedItems)
 
-    }, [products])
+    }, [])
 
 
   return (

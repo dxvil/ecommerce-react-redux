@@ -4,4 +4,13 @@
     box-sizing: border-box;
     overflow: hidden;
     font-family: 'Ubuntu', sans-serif;
+    /*we don't want user to copy anything: */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+ img {
+     pointer-events: none;
+ }

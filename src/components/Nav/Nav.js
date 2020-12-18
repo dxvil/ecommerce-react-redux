@@ -1,6 +1,7 @@
 import React from 'react';
 import './Nav.css';
 import {Link} from "react-router-dom";
+import logo from '../../images/logo.png';
 
 const Nav = () => {
     const NavStyle = {
@@ -11,7 +12,7 @@ const Nav = () => {
 
     return (
         <nav className="navbar">
-            <img className="logo" src="https://www.contourds.com/wp-content/uploads/2020/05/logo-02.png" />
+            <img className="logo" src={logo} />
             <ul className="navbar__items">
                 <Link to="/" style={NavStyle}>
                     <li>Home</li>

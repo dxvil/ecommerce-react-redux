@@ -1,11 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {connect} from "react-redux";
+import * as actionCreators from "../../../redux/actions";
 
-const Shoe = ({title, price, img}) => {
+
+const Shoe = ({title, price, img, product, addItem}) => {
     const refContainer = useRef(null);
     const refProduct = useRef(null);
     const refTitle = useRef(null);
     const refPrice = useRef(null);
     const refPic = useRef(null);
+    const [basket, setBasket] = useState([]);
+
+    const buyShoe = (item) => {
+        addItem(item)
+        setBasket(item);
+        console.log(basket)
+    };
+
 
     useEffect(() => {
         refContainer.current.addEventListener('mousemove', (e) => {
@@ -39,10 +50,11 @@ const Shoe = ({title, price, img}) => {
 
     }, [])
 
+
   return (
       <div ref={refContainer} className="container-product">
         <div ref={refProduct} key={title} className="product">
-            <button className="shoe-buy-btn"><i className="material-icons">add_shopping_cart</i></button>
+            <button className="shoe-buy-btn" onClick={(e) => {buyShoe(product)}}><i className="material-icons">add_shopping_cart</i></button>
           <div className="shoe-back">
 
           </div>
@@ -54,4 +66,12 @@ const Shoe = ({title, price, img}) => {
   );
 };
 
-export default Shoe;
+
+
+const mapStateToProps = state => {
+    console.log(state)
+    return state;
+};
+
+
+export default connect(mapStateToProps, actionCreators)(Shoe);

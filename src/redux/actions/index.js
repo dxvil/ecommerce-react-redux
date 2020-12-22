@@ -1,24 +1,24 @@
-const ADD_ITEM = 'ADD_ITEM';
-const REMOVE_ITEM = 'REMOVE_ITEM';
-const UPDATE_TOTAL_PRICE = 'UPDATE_TOTAL_PRICE';
+export const ADD_ITEM = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const UPDATE_TOTAL_PRICE = 'UPDATE_TOTAL_PRICE';
 
 export function addItem(item) {
     return {
         type: ADD_ITEM,
-        payload: {title: item.title, price: item.price}
+        payload: item
     }
 }
 
 export function removeItem(item) {
     return {
         type: REMOVE_ITEM,
-        payload: {title: item.title, price: item.price}
+        payload: item
     }
 }
 
-export function updateTotalPrice(...items) {
+export function updateTotalPrice(item) {
     return {
         type: UPDATE_TOTAL_PRICE,
-        payload: items.reduce((a, b) => a + b, 0)
+        payload: item.price.reduce((a, b) => a + b, 0)
     }
 }

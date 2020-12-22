@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #000;
+    width: 100%;
     height: 100vh;
     /*we don't want user to copy anything: */
     -webkit-touch-callout: none;
@@ -16,6 +17,7 @@ body {
     perspective: 1000px;
     min-height: 100vh
 }
+
 .shop-header {
     position: relative;
     display: flex;

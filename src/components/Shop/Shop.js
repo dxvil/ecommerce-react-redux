@@ -4,6 +4,7 @@ import './Shoe/Shoe.css';
 import Shoe from "./Shoe/Shoe";
 import {products as prodArray} from "../App/App";
 
+
 const Shop = () => {
     const [products, setProducts] = useState(prodArray);
     const [list, setList] = useState([]);
@@ -27,7 +28,7 @@ const Shop = () => {
 
             const renderedItems = products.map(item => {
                 return (
-                   <Shoe price={item.price} title={item.title} img={item.image}/>
+                   <Shoe product={item} price={item.price} title={item.title} img={item.image}/>
                 )
             })
 

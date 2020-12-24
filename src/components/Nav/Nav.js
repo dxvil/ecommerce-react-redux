@@ -1,29 +1,39 @@
-import React from 'react';
-import './Nav.css';
-import {Link} from "react-router-dom";
-import logo from '../../images/logo.png';
+import React from 'react'
+import './Nav.css'
+import { Link } from 'react-router-dom'
+import logo from '../../images/logo.png'
+import { connect } from 'react-redux'
 
-const Nav = () => {
+const Nav = (props) => {
     const NavStyle = {
         listStyle: 'none',
         color: '#000',
-        textDecoration: 'none'
+        textDecoration: 'none',
     }
 
     return (
-        <nav className="navbar">
-            <img className="logo" src={logo} />
-            <ul className="navbar__items">
-                <Link to="/" style={NavStyle}>
+        <nav className='navbar'>
+            <img className='logo' src={logo} />
+            <ul className='navbar__items'>
+                <Link to='/' style={NavStyle}>
                     <li>Home</li>
                 </Link>
-                <Link to="/shop" style={NavStyle}>
+                <Link to='/shop' style={NavStyle}>
                     <li>Shop</li>
                 </Link>
-                <li className="cart"><i className="material-icons">shopping_cart</i></li>
+                <Link to='/basket'>
+                    <li className='cart'>
+                        <i className='material-icons'>shopping_cart</i>
+                    </li>
+                </Link>
+                <p className='cart-counter'>{props.products.length}</p>
             </ul>
         </nav>
     )
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+    return { products: state.products }
+}
+
+export default connect(mapStateToProps, null)(Nav)

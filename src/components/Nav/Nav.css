@@ -20,7 +20,7 @@
     transition: 0.5s ease-in-out;
 }
 
-.navbar li:hover{
+.navbar li:hover {
     color: coral;
     cursor: pointer;
 }
@@ -28,9 +28,6 @@
     padding: 0 10px;
     border-radius: 50px;
     transition: 0.8s ease-in-out;
-}
-.navbar .cart:hover {
-    border: 1px solid #fff;
 }
 
 .logo {
@@ -48,6 +45,16 @@
 
 .cart {
     position: absolute;
-    right: 5px;
+    top: 2px;
+    right: 8px;
+    color: #000;
 }
 
+.cart-counter {
+    position: absolute;
+    right: 28px;
+    top: 3px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}

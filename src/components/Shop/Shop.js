@@ -1,15 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
-import './Shop.css';
-import './Shoe/Shoe.css';
-import Shoe from "./Shoe/Shoe";
-import {products as prodArray} from "../App/App";
-
+import React, { useEffect, useRef, useState } from 'react'
+import './Shop.css'
+import './Shoe/Shoe.css'
+import Shoe from './Shoe/Shoe'
+import { products as prodArray } from '../App/App'
 
 const Shop = () => {
-    const [products, setProducts] = useState(prodArray);
-    const [list, setList] = useState([]);
+    const [products, setProducts] = useState(prodArray)
+    const [list, setList] = useState([])
 
-//something wrong with API, maybe will try it later
+    //something wrong with API, maybe will try it later
     /* useEffect(() => {
         async function shoesRequest() {
             const response = await fetch('https://shoe-catalogue-api-codex.herokuapp.com/api/shoes', {mode: 'cors'});
@@ -25,29 +24,33 @@ const Shop = () => {
     }, []) */
 
     useEffect(() => {
+        const renderedItems = products.map((item) => {
+            return (
+                <Shoe
+                    key={item.title}
+                    product={item}
+                    price={item.price}
+                    title={item.title}
+                    img={item.image}
+                />
+            )
+        })
 
-            const renderedItems = products.map(item => {
-                return (
-                   <Shoe product={item} price={item.price} title={item.title} img={item.image}/>
-                )
-            })
-
-            setList(renderedItems)
-
+        setList(renderedItems)
     }, [])
 
+    return (
+        <div className='shop'>
+            <header className='shop-header'>
+                <h2 className='shop-header__title'>Shop</h2>
+                <input
+                    className='shop-header__search-shoes'
+                    placeholder='Search...'
+                />
+            </header>
+            <section className='shop-products'>{list}</section>
+        </div>
+    )
+}
 
-  return (
-      <div className="shop">
-          <header className="shop-header">
-              <h2 className="shop-header__title">Shop</h2>
-              <input className="shop-header__search-shoes" placeholder="Search..."/>
-          </header>
-          <section className="shop-products">
-              {list}
-          </section>
-  </div>
-  );
-};
-
-export default Shop;
+export default Shop

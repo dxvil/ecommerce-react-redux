@@ -1,0 +1,36 @@
+.basket {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #000;
+    height: 100vh;
+    color: #fff;
+}
+
+.basket__order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #fff;
+}
+
+.basket__product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid white;
+}
+
+.basket__product img {
+    width: 200px;
+    padding: 10px;
+}
+
+.basket__product-info {
+
+}

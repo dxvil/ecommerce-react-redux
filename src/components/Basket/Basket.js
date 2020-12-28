@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Basket.css'
 import { connect } from 'react-redux'
+import { loadFromLocalStorage } from '../../redux/store'
+import * as actionCreators from '../../redux/actions'
 
-const Basket = (props) => {
-    console.log(props)
+const Basket = ({ addItem, products }) => {
+    const [basket, setBasket] = useState(products)
+    const storage = useState(loadFromLocalStorage())
+    const [updated, setUpdated] = useState([])
+
+    useEffect(() => {
+        if (storage.length !== 0) {
+            storage.forEach((item) => {
+                console.log(item)
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        if (basket.length >= 1) {
+            basket.forEach((item) => {
+                console.log(item)
+            })
+        }
+    }, [basket])
+
     const renderOrder = (order) => {
         return order.map((item) => {
-            console.log(item, 'This is our basket')
             return (
-                <div className='basket__product'>
+                <div key={item.title} className='basket__product'>
                     <img src={item.image} alt={item.title} />
                     <p className='basket__product-info'>{item.title}</p>
                     <p className='basket__product-info'>{item.price}</p>
@@ -17,15 +37,18 @@ const Basket = (props) => {
             )
         })
     }
+
+    const conditionalRendering = () => {
+        if (basket.length === 0) {
+            return <h3>Your basket is empty</h3>
+        } else if (basket.length >= 1) {
+            return renderOrder(basket)
+        }
+    }
+
     return (
         <div className='basket'>
-            <div className='basket__order'>
-                {props.products === undefined ? (
-                    <h3>Your basket is empty</h3>
-                ) : (
-                    renderOrder(props.products)
-                )}
-            </div>
+            <div className='basket__order'>{conditionalRendering()}</div>
         </div>
     )
 }
@@ -34,4 +57,4 @@ const mapStateToProps = (state) => {
     return { products: state.products }
 }
 
-export default connect(mapStateToProps, null)(Basket)
+export default connect(mapStateToProps, actionCreators)(Basket)

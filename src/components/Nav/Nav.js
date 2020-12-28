@@ -13,7 +13,7 @@ const Nav = (props) => {
 
     return (
         <nav className='navbar'>
-            <img className='logo' src={logo} />
+            <img alt='...' className='logo' src={logo} />
             <ul className='navbar__items'>
                 <Link to='/' style={NavStyle}>
                     <li>Home</li>

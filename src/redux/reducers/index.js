@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_ITEM, REMOVE_ITEM, UPDATE_TOTAL_PRICE } from '../actions'
+import { ADD_ITEM, REMOVE_ITEM, UPDATE_AFTER_RELOAD } from '../actions'
 
 let purchaseReducer = (state = [], action) => {
     switch (action.type) {
@@ -22,6 +22,9 @@ let purchaseReducer = (state = [], action) => {
                     (item, index) => index !== action.payload
                 ),
             }
+        case UPDATE_AFTER_RELOAD:
+            return [...state, ...action.payload]
+
         default:
             return state
     }

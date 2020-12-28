@@ -13,6 +13,7 @@ const Shoe = ({ title, price, img, product, addItem }) => {
     const buyShoe = (item) => {
         addItem(item)
         setBasket(item)
+        console.log(product)
         //change to not so many renders!
     }
 
@@ -72,7 +73,6 @@ const Shoe = ({ title, price, img, product, addItem }) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state, 'changes?')
     return state
 }
 

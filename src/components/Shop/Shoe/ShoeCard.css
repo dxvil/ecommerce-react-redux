@@ -1,0 +1,99 @@
+.details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+}
+
+.product-details {
+    display: flex;
+    margin: 10px 0 0 0;
+    color: #000;
+    width: 70%;
+    height: 70%;
+    background-color: #ffd694;
+    border-radius: 50px;
+}
+.product-details__header, .product-details__view {
+    overflow: visible;
+}
+
+.product-details__header{
+    width: 25%;
+    margin: 10% 30px 0 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.product-details__description{
+    width: 240px;
+    margin: 15px 0 0 0;
+}
+.product-details__view {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+
+}
+
+.details-header {
+    margin: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.product-details__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    background-color: #fff1bc;
+    border-radius: 50%;
+    box-shadow: 4px 4px 10px 3px #fff;
+}
+
+.product-details__img img {
+    width: 75%;
+}
+
+.product-details__price{
+    font-size: 30px;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-start;
+    margin: 0 150px 0 0;
+}
+
+.product-details__buttons{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin: -10% 100px 30px 0;
+}
+.shoe-btn{
+    margin: 0 30px 0 0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid #000;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #000;
+    transition: 0.1s ease-in;
+}
+
+.shoe-btn:hover{
+    color: coral;
+    cursor: pointer;
+    border: 1px solid #fff;
+}

@@ -1,56 +1,55 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Basket.css'
 import { connect } from 'react-redux'
-import { loadFromLocalStorage } from '../../redux/store'
 import * as actionCreators from '../../redux/actions'
 
-const Basket = ({ addItem, products }) => {
-    const [basket, setBasket] = useState(products)
-    const storage = useState(loadFromLocalStorage())
-    const [updated, setUpdated] = useState([])
-
-    useEffect(() => {
-        if (storage.length !== 0) {
-            storage.forEach((item) => {
-                console.log(item)
-            })
+class Basket extends React.Component {
+    constructor(props) {
+        super(props)
+        this.conditionalRendering = this.conditionalRendering.bind(this)
+        this.renderOrder = this.renderOrder.bind(this)
+        this.state = {
+            basket: props.products,
         }
-    }, [])
+    }
 
-    useEffect(() => {
-        if (basket.length >= 1) {
-            basket.forEach((item) => {
-                console.log(item)
-            })
-        }
-    }, [basket])
-
-    const renderOrder = (order) => {
+    renderOrder = (order) => {
         return order.map((item) => {
             return (
                 <div key={item.title} className='basket__product'>
                     <img src={item.image} alt={item.title} />
                     <p className='basket__product-info'>{item.title}</p>
-                    <p className='basket__product-info'>{item.price}</p>
-                    <p className='basket__product-info'>{item.quantity}</p>
+                    <p className='basket__product-info'>Price: {item.price}</p>
+                    <p className='basket__product-info'>
+                        Quantity: {item.quantity}
+                    </p>
                 </div>
             )
         })
     }
 
-    const conditionalRendering = () => {
-        if (basket.length === 0) {
-            return <h3>Your basket is empty</h3>
-        } else if (basket.length >= 1) {
-            return renderOrder(basket)
+    conditionalRendering = () => {
+        if (this.state.basket.length === 0) {
+            return <p>Your basket is empty</p>
+        } else if (this.state.basket.length >= 1) {
+            return (
+                <>
+                    {this.renderOrder(this.state.basket)}
+                    <div className='basket__price'>Total price: 300 eur</div>
+                </>
+            )
         }
     }
 
-    return (
-        <div className='basket'>
-            <div className='basket__order'>{conditionalRendering()}</div>
-        </div>
-    )
+    render() {
+        return (
+            <div className='basket'>
+                <div className='basket__order'>
+                    {this.conditionalRendering()}
+                </div>
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {

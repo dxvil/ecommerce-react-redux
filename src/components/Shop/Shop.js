@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './Shop.css'
 import './Shoe/Shoe.css'
 import Shoe from './Shoe/Shoe'
-import { products as prodArray } from '../App/App'
 
-const Shop = () => {
+const Shop = ({ items }) => {
     // eslint-disable-next-line no-unused-vars
-    const [products, setProducts] = useState(prodArray)
+    const [products, setProducts] = useState(items)
     const [list, setList] = useState([])
 
     useEffect(() => {
@@ -18,6 +17,7 @@ const Shop = () => {
                     price={item.price}
                     title={item.title}
                     img={item.image}
+                    id={item.id}
                 />
             )
         })

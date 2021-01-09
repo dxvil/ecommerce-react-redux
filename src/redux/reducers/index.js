@@ -7,14 +7,15 @@ let purchaseReducer = (state = [], action) => {
             if (state.includes(action.payload)) {
                 state.filter((item) => {
                     if (item === action.payload) {
-                        return (item.quantity += 1)
+                        return [...state, (action.payload.quantity += 1)]
                     } else {
                         return null
                     }
                 })
                 return state
+            } else {
+                return [...state, action.payload]
             }
-            return [...state, action.payload]
         case REMOVE_ITEM:
             return {
                 ...state,

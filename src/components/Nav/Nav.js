@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Nav.css'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.png'
 import { connect } from 'react-redux'
 
-const Nav = (props) => {
+const Nav = ({ products }) => {
+    const [quantity, setQuantity] = useState(0)
+    const [basket, setBasket] = useState(products)
+
+    useEffect(() => {
+        const acc = 0
+        setQuantity(products.reduce((acc, item) => acc + item.quantity, 0))
+    })
+
     const NavStyle = {
         listStyle: 'none',
         color: '#000',
@@ -26,7 +34,7 @@ const Nav = (props) => {
                         <i className='material-icons'>shopping_cart</i>
                     </li>
                 </Link>
-                <p className='cart-counter'>{props.products.length}</p>
+                <p className='cart-counter'>{quantity}</p>
             </ul>
         </nav>
     )

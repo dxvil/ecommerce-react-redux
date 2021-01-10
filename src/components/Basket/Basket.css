@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin: 20px;
-    padding: 0 30px;
+    padding: 0 50px;
 }
 
 .basket__price {
@@ -24,7 +24,10 @@
     text-align: right;
     width: 150px;
     height: 150px;
-    background-color: lightcoral;
+    background-color: #001133;
+    border-bottom: 1px solid coral;
+    border-left: 1px solid coral;
+    border-bottom-left-radius: 30%;
     color: #fff;
     font-size: 30px;
     padding: 15px;
@@ -33,10 +36,9 @@
     transition: 0.3s ease;
 }
 .basket__price:hover{
-    background-color: #001133;
-    border-bottom: 1px solid coral;
-    border-left: 1px solid coral;
-    border-bottom-left-radius: 30%;
+    background-color: #174679;
+    border-bottom: 1px solid #ff4500;
+    border-left: 1px solid #ff4500;
 }
 
 .basket__product {
@@ -47,16 +49,17 @@
     width: 20%;
     min-width: 200px;
     max-width: 30%;
+    background-color: #001133;
     height: 240px;
     padding: 5px;
     margin: 10px 5px;
     border-bottom: 1px solid #013;
-    transition: 0.1s ease-in;
+    transition: 0.5ms linear;
 }
 
 .basket__product:hover {
-    background-color: #013;
     border-bottom: 2px solid coral;
+    border-right: 2px solid coral;
 }
 
 

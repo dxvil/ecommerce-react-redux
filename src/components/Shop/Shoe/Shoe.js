@@ -9,12 +9,9 @@ const Shoe = ({ title, price, img, product, id, addItem }) => {
     const refTitle = useRef(null)
     const refPrice = useRef(null)
     const refPic = useRef(null)
-    const [basket, setBasket] = useState([])
-    const [activeProduct, setActiveProduct] = useState(false)
 
     const buyShoe = (item) => {
         addItem(item)
-        setBasket((basket) => [...basket, item])
         //change to not so many renders!
     }
 

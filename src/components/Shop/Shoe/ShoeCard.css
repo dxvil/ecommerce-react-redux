@@ -34,7 +34,7 @@
     margin: 15px 0 0 0;
 }
 .product-details__view {
-    width: 75%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -60,6 +60,15 @@
     box-shadow: 4px 4px 10px 3px #fff;
 }
 
+.product-details__more{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    padding: 8% 0;
+}
+
+
 .product-details__img img {
     width: 75%;
 }
@@ -67,17 +76,12 @@
 .product-details__price{
     font-size: 30px;
     display: flex;
-    align-self: flex-end;
-    justify-content: flex-start;
-    margin: 0 150px 0 0;
 }
 
-.product-details__buttons{
+.product-details__buttons {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    margin: -10% 100px 30px 0;
 }
+
 .shoe-btn{
     margin: 0 30px 0 0;
     width: 50px;
@@ -96,4 +100,53 @@
     color: coral;
     cursor: pointer;
     border: 1px solid #fff;
+}
+
+.shoe-btn:first-child:active {
+    border: 1px solid #008000;
+    color: #008000;
+}
+
+.shoe-btn:last-child:active{
+    border: 1px solid #ff0000;
+    color: #ff0000;
+}
+
+.product-details__sizes{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.sizes-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 15px;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #eac086;
+    margin: 5px;
+}
+
+.sizes-btn:hover{
+    background-color: #FA8A07;
+}
+
+.sizes-btn:active{
+    border: 2px solid #ff4500;
+}
+
+.active-btn-size {
+    background-color: #FA8A07;
+    border: 2px solid #ff4500;
+}
+
+.sizes-header {
+    font-size: 25px;
+    width: 200px;
+    margin: 0 0 5px 0;
 }

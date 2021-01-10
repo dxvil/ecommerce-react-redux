@@ -9,8 +9,12 @@ const Nav = ({ products }) => {
     const [basket, setBasket] = useState(products)
 
     useEffect(() => {
-        const acc = 0
-        setQuantity(products.reduce((acc, item) => acc + item.quantity, 0))
+        if (products.length !== 0) {
+            const acc = 0
+            setQuantity(products.reduce((acc, item) => acc + item.quantity, 0))
+        } else if (products.length === 0) {
+            setQuantity(0)
+        }
     })
 
     const NavStyle = {

@@ -23,6 +23,7 @@ export const products = [
         image: shoePic,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 2,
@@ -31,6 +32,7 @@ export const products = [
         image: shoePic2,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 3,
@@ -39,6 +41,7 @@ export const products = [
         image: shoePic3,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 4,
@@ -47,6 +50,7 @@ export const products = [
         image: shoePic4,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 5,
@@ -55,6 +59,7 @@ export const products = [
         image: shoePic5,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 6,
@@ -63,6 +68,7 @@ export const products = [
         image: shoePic,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 7,
@@ -71,6 +77,7 @@ export const products = [
         image: shoePic2,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 8,
@@ -79,6 +86,7 @@ export const products = [
         image: shoePic3,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 9,
@@ -87,6 +95,7 @@ export const products = [
         image: shoePic4,
         quantity: 1,
         shipping: true,
+        size: [],
     },
     {
         id: 10,
@@ -95,6 +104,7 @@ export const products = [
         image: shoePic5,
         quantity: 1,
         shipping: true,
+        size: [],
     },
 ]
 

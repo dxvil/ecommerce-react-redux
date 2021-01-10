@@ -1,30 +1,23 @@
 import { combineReducers } from 'redux'
-import { ADD_ITEM, REMOVE_ITEM, UPDATE_AFTER_RELOAD } from '../actions'
+import { ADD_ITEM, REMOVE_ITEM } from '../actions'
 
-let purchaseReducer = (state = [], action) => {
-    switch (action.type) {
+let purchaseReducer = (state = [], { payload, type }) => {
+    switch (type) {
         case ADD_ITEM:
-            if (state.includes(action.payload)) {
+            if (state.includes(payload)) {
                 state.filter((item) => {
-                    if (item === action.payload) {
-                        return [...state, (action.payload.quantity += 1)]
+                    if (item === payload && item.size === payload.size) {
+                        return [...state, (payload.quantity += 1)]
                     } else {
                         return null
                     }
                 })
                 return state
             } else {
-                return [...state, action.payload]
+                return [...state, payload]
             }
         case REMOVE_ITEM:
-            return {
-                ...state,
-                items: state.items.filter(
-                    (item, index) => index !== action.payload
-                ),
-            }
-        case UPDATE_AFTER_RELOAD:
-            return [...state, ...action.payload]
+            return state.filter((item) => item.id !== payload)
 
         default:
             return state

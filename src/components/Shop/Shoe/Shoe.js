@@ -18,7 +18,7 @@ const Shoe = ({ title, price, img, product, id, addItem }) => {
     useEffect(() => {
         refContainer.current.addEventListener('mousemove', (e) => {
             let xAxis = (window.innerHeight / 2 - e.pageX) / 20
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 10
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 20
             const card = refProduct.current
             card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`
         })

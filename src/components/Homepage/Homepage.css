@@ -1,7 +1,8 @@
 .home {
+    overflow: hidden;
     position: relative;
-    width: 100vw;
     max-width: 100%;
+    width: 100%;
     height: 100vh;
     background: #000 url("https://sneakernews.com/wp-content/uploads/2013/01/kobe-8-bhm-release-date.jpg") no-repeat 35%/70%;
 }

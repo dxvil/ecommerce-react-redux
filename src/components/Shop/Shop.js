@@ -13,7 +13,7 @@ const Shop = ({ items }) => {
             return (
                 <Shoe
                     key={item.title}
-                    product={item}
+                    prod={products}
                     price={item.price}
                     title={item.title}
                     img={item.image}

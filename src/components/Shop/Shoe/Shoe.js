@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../../redux/actions'
 import { Link } from 'react-router-dom'
 
-const Shoe = ({ title, price, img, product, id, addItem }) => {
+const Shoe = ({ title, price, img, product, id, addItem, prod }) => {
     const refContainer = useRef(null)
     const refProduct = useRef(null)
     const refTitle = useRef(null)
     const refPrice = useRef(null)
     const refPic = useRef(null)
-
+    const items = useState(prod)
     const buyShoe = (item) => {
         addItem(item)
         //change to not so many renders!
@@ -44,18 +44,19 @@ const Shoe = ({ title, price, img, product, id, addItem }) => {
             const pic = refPic.current
             pic.style.transform = 'translateZ(0px)'
         })
+        console.log(prod, 'hm! look')
     }, [])
 
     return (
         <div ref={refContainer} className='container-product'>
             <div ref={refProduct} key={title} className='product'>
                 <Link
-                    to={`shoe/item/${id}`}
-                    state={{
-                        title,
-                        img,
-                        id,
-                        price,
+                    to={{
+                        pathname: `shoe/item/${id}`,
+                        state: {
+                            prods: prod,
+                            fromShop: true,
+                        },
                     }}
                 >
                     <button className='product-info-btn'>

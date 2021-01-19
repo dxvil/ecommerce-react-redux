@@ -1,60 +1,81 @@
-import React, { useEffect, useState } from 'react'
-import { products } from '../../App/App'
+import React from 'react'
 import './ShoeCard.css'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../redux/actions'
 import Alert from '../../vidgets/Alert'
+import { db } from '../../../firebase/Firebase'
+import { Link } from 'react-router-dom'
+import LoaderText from '../../SemanticUI/Loader'
+import NextIcon from '../../SemanticUI/NextIcon'
 
-const ShoeCard = ({ addItem, removeItem, location }) => {
-    const [size, setShoeSize] = useState(null)
-    const [alert, setAlert] = useState(false)
-    const tS = 37,
-        tE = 38,
-        tN = 39,
-        f = 40,
-        fO = 41,
-        fT = 42
-    const itemId = parseInt(location.pathname.match(/\d+/)) - 1
+class ShoeCard extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            items: [],
+            ready: false,
+            size: null,
+            alert: false,
+            sizes: {
+                tS: 37,
+                tE: 38,
+                tN: 39,
+                f: 40,
+                fO: 41,
+                fT: 42,
+            },
+            itemId: parseInt(this.props.match.params.id),
+            fromShop: false,
+            fromDatabase: false,
+        }
+    }
 
-    const sizeReduxHandler = (e) => {
-        if (size !== null) {
-            let prevSize = products[itemId].size
-            products[itemId].size = [...prevSize, size]
-            addItem(products[itemId])
+    componentDidMount() {
+        if (this.props.location.state !== undefined) {
+            this.setState({
+                items: this.props.location.state.prods,
+                fromShop: true,
+            })
         } else {
-            setAlert(true)
-            setTimeout(() => {
-                setAlert(false)
-            }, 1000)
+            this.getDataFromDatabase()
         }
     }
 
-    const sizeReduxRemover = (e) => {
-        removeItem(itemId + 1)
+    getDataFromDatabase = () => {
+        db.collection('products')
+            .get()
+            .then((items) => {
+                let arr = []
+                items.forEach((item) => {
+                    let transformVar = item.data()
+                    arr.push(transformVar)
+                })
+                return arr
+            })
+            .then((data) => {
+                this.setState({
+                    items: data,
+                    fromDatabase: true,
+                })
+            })
     }
 
-    const changeColorBtn = (e) => {
-        if (e !== undefined) {
-            e.classList.toggle('active-btn-size')
+    renderI = () => {
+        let id = this.state.itemId,
+            item
+        let renderingItem
+        if (this.state.fromDatabase === true) {
+            item = this.state.items.find((i) => i.item.id === id)
+            renderingItem = item.item
+        } else if (this.state.fromShop === true) {
+            item = this.state.items.find((i) => i.id === id)
+            renderingItem = item
         }
-    }
 
-    const sizeHandler = (e, s) => {
-        if (e !== undefined) {
-            if (e.classList.contains('active-btn-size')) {
-                changeColorBtn(e)
-            } else {
-                changeColorBtn(e)
-                setShoeSize(s)
-            }
-        }
-    }
-
-    const render = () => {
         return (
             <div className='product-details'>
                 <div className='product-details__header'>
-                    <h1>{products[itemId].title}</h1>
+                    <h1>{renderingItem.title}</h1>
                     <p className='product-details__description'>
                         Description. Shoe. Description. Shoe. Lorem ipsum dolor
                         sit amet. Lorem ipsum dolor sit amet, consectetur
@@ -64,7 +85,7 @@ const ShoeCard = ({ addItem, removeItem, location }) => {
 
                 <div className='product-details__view'>
                     <div className='product-details__img'>
-                        <img src={products[itemId].image} />
+                        <img src={renderingItem.image} />
                     </div>
                 </div>
                 <div className='product-details__more'>
@@ -72,69 +93,170 @@ const ShoeCard = ({ addItem, removeItem, location }) => {
                         <p className='sizes-header'>Sizes:</p>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, tS)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.tS
+                                )
+                            }
                         >
-                            {tS}
+                            {this.state.sizes.tS}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, tE)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.tE
+                                )
+                            }
                         >
-                            {tE}
+                            {this.state.sizes.tE}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, tN)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.tN
+                                )
+                            }
                         >
-                            {tN}
+                            {this.state.sizes.tN}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, f)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.f
+                                )
+                            }
                         >
-                            {f}
+                            {this.state.sizes.f}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, fO)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.fO
+                                )
+                            }
                         >
-                            {fO}
+                            {this.state.sizes.fO}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) => sizeHandler(e.target, fT)}
+                            onClick={(e) =>
+                                this.sizeHandler(
+                                    e,
+                                    e.target,
+                                    this.state.sizes.fT
+                                )
+                            }
                         >
-                            {fT}
+                            {this.state.sizes.fT}
                         </div>
                     </div>
                     <div className='product-details__buttons'>
                         <button
                             className='shoe-btn buy-btn'
-                            onClick={(e) => sizeReduxHandler(e)}
+                            onClick={(e) => this.sizeReduxHandler(e)}
                         >
                             +
                         </button>
                         <button
                             className='shoe-btn remove-btn'
-                            onClick={() => sizeReduxRemover()}
+                            onClick={(e) => this.sizeReduxRemover(e)}
                         >
                             -
                         </button>
                     </div>
                     {alert ? <Alert text={'Choose a size, please'} /> : null}
                     <p className='product-details__price'>
-                        {products[itemId].price}
+                        {renderingItem.price}
                     </p>
                 </div>
             </div>
         )
     }
-    return (
-        <div className='details'>
-            <p className='details-header'>Product Details</p>
-            {render()}
-        </div>
-    )
+
+    conditionalRendering = () => {
+        if (this.state.fromShop || this.state.fromDatabase) {
+            return this.renderI()
+        }
+        return <LoaderText />
+    }
+
+    changeItemToPrevious = () => {
+        if (this.state.itemId !== 1) {
+            this.setState((prevState) => ({
+                itemId: prevState.itemId - 1,
+            }))
+            return (
+                <Link
+                    to={{
+                        pathname: `shoe/item/${this.state.itemId}`,
+                        state: {
+                            prods: this.state.items,
+                        },
+                    }}
+                />
+            )
+        }
+    }
+
+    changeItemToNext = () => {
+        if (this.state.itemId !== 10) {
+            this.setState((prevState) => ({
+                itemId: prevState.itemId + 1,
+            }))
+            return (
+                <Link
+                    to={{
+                        pathname: `shoe/item/${this.state.itemId}`,
+                        state: {
+                            prods: this.state.items,
+                        },
+                    }}
+                />
+            )
+        }
+    }
+
+    render() {
+        return (
+            <div className='details'>
+                <p className='details-header'>Product Details</p>
+                <div>
+                    <button
+                        onClick={() => this.changeItemToPrevious()}
+                        className='ui left attached button secondary'
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => this.changeItemToNext()}
+                        className='right attached ui button secondary'
+                    >
+                        Next
+                    </button>
+                </div>
+                <Link to={'/shop'}>
+                    <button className='ui inverted brown basic button'>
+                        Back to Shop
+                    </button>
+                </Link>
+                {this.conditionalRendering()}
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {

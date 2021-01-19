@@ -1,0 +1,98 @@
+import shoePic from '../images/shoe.png'
+import shoePic2 from '../images/2.png'
+import shoePic3 from '../images/3.png'
+import shoePic4 from '../images/4.png'
+import shoePic5 from '../images/5.png'
+
+export const products = [
+    {
+        id: 1,
+        title: 'Jordan 11 Retro',
+        price: '200 Eur',
+        image: shoePic,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 2,
+        title: 'Nike Air Max 97',
+        price: '160 Eur',
+        image: shoePic2,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 3,
+        title: 'Chuck Taylor OX Low',
+        price: '50 Eur',
+        image: shoePic3,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 4,
+        title: 'Vans Ward',
+        price: '60 Eur',
+        image: shoePic4,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 5,
+        title: 'Adidas Yeezy Boost 350 V2',
+        price: '500 Eur',
+        image: shoePic5,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 6,
+        title: 'Air Jordan 4 Retro',
+        price: '205 Eur',
+        image: shoePic,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 7,
+        title: 'Adidas NMD R1',
+        price: '130 Eur',
+        image: shoePic2,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 8,
+        title: 'Nike Tanjun',
+        price: '65 Eur',
+        image: shoePic3,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 9,
+        title: 'Nike Air Force 1 Low',
+        price: '90 Eur',
+        image: shoePic4,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+    {
+        id: 10,
+        title: 'Nike Air Max 270',
+        price: '160 Eur',
+        image: shoePic5,
+        quantity: 1,
+        shipping: true,
+        size: [],
+    },
+]

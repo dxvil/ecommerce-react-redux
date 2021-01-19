@@ -30,8 +30,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100vw;
-   overflow-y: scroll;
+    width: 100%;
+    overflow: hidden;
     padding: 0 0 500px 0;
 }
 

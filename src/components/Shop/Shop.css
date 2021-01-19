@@ -13,10 +13,6 @@
     user-select: none;
 
 }
-body {
-    perspective: 1000px;
-    min-height: 100vh
-}
 
 .shop-header {
     position: relative;

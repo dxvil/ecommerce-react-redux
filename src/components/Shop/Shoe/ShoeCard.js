@@ -6,7 +6,6 @@ import Alert from '../../vidgets/Alert'
 import { db } from '../../../firebase/Firebase'
 import { Link } from 'react-router-dom'
 import LoaderText from '../../SemanticUI/Loader'
-import NextIcon from '../../SemanticUI/NextIcon'
 
 class ShoeCard extends React.Component {
     constructor(props) {
@@ -234,7 +233,7 @@ class ShoeCard extends React.Component {
         return (
             <div className='details'>
                 <p className='details-header'>Product Details</p>
-                <div>
+                <div className='shoe-card__nav-btn'>
                     <button
                         onClick={() => this.changeItemToPrevious()}
                         className='ui left attached button secondary'
@@ -249,7 +248,7 @@ class ShoeCard extends React.Component {
                     </button>
                 </div>
                 <Link to={'/shop'}>
-                    <button className='ui inverted brown basic button'>
+                    <button className='ui inverted brown basic button back-btn'>
                         Back to Shop
                     </button>
                 </Link>

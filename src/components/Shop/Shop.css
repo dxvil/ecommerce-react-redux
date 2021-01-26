@@ -4,7 +4,8 @@
     align-items: center;
     background-color: #000;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     /*we don't want user to copy anything: */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -12,6 +13,10 @@
     -ms-user-select: none;
     user-select: none;
 
+}
+.search-message {
+    max-width: 50%;
+    border: 1px solid darkgrey;
 }
 
 .shop-header {
@@ -46,4 +51,19 @@
     background-color: #F8D4BD;
     font-size: 30px;
     padding: 5px;
+}
+
+.shop-header__search-shoes:focus{
+    background-color: #eac086;
+}
+
+.shop-undo-btn {
+    position: absolute;
+    right: 5px;
+}
+
+.shop-dropdown {
+    position: absolute;
+    left: -50%;
+    width: 200px;
 }

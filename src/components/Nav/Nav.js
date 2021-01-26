@@ -25,7 +25,7 @@ const Nav = ({ products }) => {
 
     return (
         <nav className='navbar'>
-            <img alt='...' className='logo' src={logo} />
+            <img alt='...' className='nav__logo' src={logo} />
             <ul className='navbar__items'>
                 <Link to='/' style={NavStyle}>
                     <li>Home</li>
@@ -34,8 +34,8 @@ const Nav = ({ products }) => {
                     <li>Shop</li>
                 </Link>
                 <Link to='/basket'>
-                    <li className='cart'>
-                        <i className='material-icons'>shopping_cart</i>
+                    <li className='nav__cart'>
+                        <i className='icon shopping cart'></i>
                     </li>
                 </Link>
                 <p className='cart-counter'>{quantity}</p>

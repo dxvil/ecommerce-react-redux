@@ -17,20 +17,19 @@ const Shoe = ({ title, price, img, product, id, addItem, prod }) => {
 
     useEffect(() => {
         refContainer.current.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerHeight / 2 - e.pageX) / 20
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 20
             const card = refProduct.current
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`
+            card.style.transform = `rotateX(3deg)`
         })
         refContainer.current.addEventListener('mouseenter', () => {
             const card = refProduct.current
+
             card.style.transition = 'none'
             const title = refTitle.current
             title.style.transform = 'translateZ(150px)'
             const price = refPrice.current
             price.style.transform = 'translateZ(120px)'
             const pic = refPic.current
-            pic.style.transform = 'translateZ(200px) rotateZ(5deg)'
+            pic.style.transform = 'translateZ(200px) rotateZ(-15deg)'
         })
 
         refContainer.current.addEventListener('mouseleave', () => {
@@ -44,7 +43,6 @@ const Shoe = ({ title, price, img, product, id, addItem, prod }) => {
             const pic = refPic.current
             pic.style.transform = 'translateZ(0px)'
         })
-        console.log(prod, 'hm! look')
     }, [])
 
     return (
@@ -60,7 +58,7 @@ const Shoe = ({ title, price, img, product, id, addItem, prod }) => {
                     }}
                 >
                     <button className='product-info-btn'>
-                        <i className='material-icons'>info</i>
+                        <i className='info icon'></i>
                     </button>
                 </Link>
                 <button
@@ -69,9 +67,9 @@ const Shoe = ({ title, price, img, product, id, addItem, prod }) => {
                         buyShoe(product)
                     }}
                 >
-                    <i className='material-icons'>add_shopping_cart</i>
+                    <i className='shopping cart icon'></i>
                 </button>
-                <div className='shoe-back'></div>
+                <div className='shoe-back' />
                 <img ref={refPic} className='shoe-pic' alt={title} src={img} />
                 <p ref={refTitle} className='shoe-title'>
                     {title}

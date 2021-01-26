@@ -25,13 +25,13 @@
     color: coral;
     cursor: pointer;
 }
-.cart {
+.nav__cart {
     padding: 0 10px;
     border-radius: 50px;
     transition: 0.8s ease-in-out;
 }
 
-.logo {
+.nav__logo {
     position: absolute;
     top: 5px;
     left: 20px;
@@ -44,9 +44,10 @@
     cursor: cell;
 }
 
-.cart {
+.nav__cart {
     position: absolute;
-    top: 2px;
+    top: 15px;
+    font-size: 30px;
     right: 8px;
     color: #000;
 }

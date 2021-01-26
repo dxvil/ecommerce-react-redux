@@ -49,7 +49,7 @@ class App extends React.Component {
         return (
             <HashRouter>
                 <div className='App'>
-                    <Nav />
+                    <Nav products={this.state.products} />
                     <Switch>
                         <Route exact path='/' component={Homepage} />
                         <Route

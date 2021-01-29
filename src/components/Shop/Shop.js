@@ -52,31 +52,36 @@ const Shop = ({ items }) => {
         setSearched(false)
         setSearch(e.target.value.toLowerCase())
         let searchingValues
-        if (search.length > 1) {
+        if (search.length > 1 && !isSearched) {
             searchingValues = list.filter((item) =>
                 item.key.toLowerCase().includes(search)
             )
-            //if no match that show some error
-
-            if (searchingValues.length !== 0) {
-                searchingValues.map((item) => {
-                    return (
-                        <Shoe
-                            key={item.props.title}
-                            prod={products}
-                            price={item.props.price}
-                            title={item.props.title}
-                            img={item.props.image}
-                            id={item.props.id}
-                        />
-                    )
-                })
-                setSearched(true)
-                setFiltered(searchingValues)
-                setTimeout(() => {
-                    setSearch('')
-                }, 1000)
-            }
+        } else if(isSearched) {
+            searchingValues = filtered.filter((item) =>
+                item.key.toLowerCase().includes(search)
+            )
+        }
+        //if matches
+        if (searchingValues.length !== 0) {
+            searchingValues.map((item) => {
+                return (
+                    <Shoe
+                        key={item.props.title}
+                        prod={products}
+                        price={item.props.price}
+                        title={item.props.title}
+                        img={item.props.image}
+                        id={item.props.id}
+                    />
+                )
+            })
+            setSearched(true)
+            setFiltered(searchingValues)
+            setTimeout(() => {
+                setSearch('')
+            }, 1000)
+        }
+        //if no matches
             if (searchingValues.length === 0) {
                 let error = (
                     <div className='ui icon message search-message'>
@@ -92,7 +97,6 @@ const Shop = ({ items }) => {
                     setSearch('')
                 }, 1000)
             }
-        }
     }
 
     const dropDownFiltering = (e) => {

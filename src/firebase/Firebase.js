@@ -26,7 +26,7 @@ export const setProductsToDatabase = (path) => {
                 item,
             })
             .then(function (docRef) {
-                console.log('Document written')
+                return docRef
             })
             .catch(function (error) {
                 throw new Error(error)

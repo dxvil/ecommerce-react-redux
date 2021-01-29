@@ -43,21 +43,19 @@ class App extends React.Component {
                     ],
                 }))
             })
+            .then(() => {
+                this.props.initStore(this.state.products)
+            })
     }
 
     render() {
         return (
             <HashRouter>
                 <div className='App'>
-                    <Nav products={this.state.products} />
+                    <Nav />
                     <Switch>
                         <Route exact path='/' component={Homepage} />
-                        <Route
-                            path='/shop'
-                            component={() => (
-                                <Shop items={this.state.products} />
-                            )}
-                        />
+                        <Route path='/shop' component={() => <Shop />} />
                         <Route path='/basket' component={Basket} />
                         <Route path='/shoe/item/:id' component={ShoeCard} />
                     </Switch>
@@ -72,4 +70,5 @@ const mapStateToProps = (state) => {
         prods: state.products,
     }
 }
+
 export default connect(mapStateToProps, actionCreators)(App)

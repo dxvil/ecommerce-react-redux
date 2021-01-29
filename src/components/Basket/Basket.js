@@ -23,6 +23,7 @@ class Basket extends React.Component {
                     <p className='basket__product-info'>
                         Quantity: {item.quantity}
                     </p>
+                    <p>{item.size}</p>
                 </div>
             )
         })

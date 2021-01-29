@@ -1,6 +1,14 @@
 export const ADD_ITEM = 'ADD_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const UPDATE_TOTAL_PRICE = 'UPDATE_TOTAL_PRICE'
+export const INIT_STORE = 'INIT_STORE'
+
+export function initStore(items) {
+    return {
+        type: INIT_STORE,
+        payload: items,
+    }
+}
 
 export function addItem(item) {
     return {

@@ -92,72 +92,46 @@ class ShoeCard extends React.Component {
                         <p className='sizes-header'>Sizes:</p>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.tS
-                                )
+                            onClick={() =>
+                                this.sizeHandler(this.state.sizes.tS)
                             }
                         >
                             {this.state.sizes.tS}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.tE
-                                )
+                            onClick={() =>
+                                this.sizeHandler(this.state.sizes.tE)
                             }
                         >
                             {this.state.sizes.tE}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.tN
-                                )
+                            onClick={() =>
+                                this.sizeHandler(this.state.sizes.tN)
                             }
                         >
                             {this.state.sizes.tN}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.f
-                                )
-                            }
+                            onClick={() => this.sizeHandler(this.state.sizes.f)}
                         >
                             {this.state.sizes.f}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.fO
-                                )
+                            onClick={() =>
+                                this.sizeHandler(this.state.sizes.fO)
                             }
                         >
                             {this.state.sizes.fO}
                         </div>
                         <div
                             className='sizes-btn'
-                            onClick={(e) =>
-                                this.sizeHandler(
-                                    e,
-                                    e.target,
-                                    this.state.sizes.fT
-                                )
+                            onClick={() =>
+                                this.sizeHandler(this.state.sizes.fT)
                             }
                         >
                             {this.state.sizes.fT}
@@ -229,6 +203,48 @@ class ShoeCard extends React.Component {
         }
     }
 
+    sizeHandler = (s) => {
+        if (s !== undefined) {
+            this.setState({
+                size: s,
+            })
+        }
+    }
+
+    sizeReduxHandler = () => {
+        if (this.state.size !== null && !isNaN(this.state.size)) {
+            let itemWithSize = {}
+            if (this.state.fromDatabase) {
+                itemWithSize = {
+                    ...this.state.items[this.state.itemId].item,
+                    size: [
+                        ...this.state.items[this.state.itemId].item.size,
+                        this.state.size,
+                    ],
+                }
+            } else if (this.state.fromShop) {
+                itemWithSize = {
+                    ...this.state.items[this.state.itemId],
+                    size: [
+                        ...this.state.items[this.state.itemId].size,
+                        this.state.size,
+                    ],
+                }
+            }
+            console.log(itemWithSize)
+            this.props.addItem(itemWithSize)
+        } else {
+            //do alert logic
+        }
+    }
+
+    sizeReduxRemover = (e) => {
+        if (this.state.fromDatabase) {
+            this.props.removeItem(this.state.items[this.state.itemId].item)
+        } else if (this.state.fromShop) {
+            this.props.removeItem(this.state.items[this.state.itemId])
+        }
+    }
     render() {
         return (
             <div className='details'>

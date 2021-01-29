@@ -3,10 +3,12 @@ import './Shop.css'
 import './Shoe/Shoe.css'
 import Shoe from './Shoe/Shoe'
 import { Loader } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 const Shop = ({ items }) => {
     // eslint-disable-next-line no-unused-vars
-    const [products, setProducts] = useState(items)
+    const [products, setProducts] = useState([])
+    const [fetched, setFetched] = useState(false)
     const [list, setList] = useState([])
     const [filtered, setFiltered] = useState([])
     const [search, setSearch] = useState('')
@@ -15,23 +17,36 @@ const Shop = ({ items }) => {
     const [filterBySelect, setFilterBySelect] = useState('')
 
     useEffect(() => {
-        const renderedItems = products.map((item) => {
-            return (
-                <Shoe
-                    key={item.title}
-                    prod={products}
-                    product={products[item.id]}
-                    price={item.price}
-                    title={item.title}
-                    img={item.image}
-                    id={item.id}
-                />
-            )
-        })
+        if (items.length > 0) {
+            setProducts(items[0].payload)
+        }
+        if (products.length > 0) {
+            setFetched(true)
+        }
+    })
 
-        setList(renderedItems)
-        setInitialState(renderedItems)
-    }, [])
+    useEffect(() => {
+        if (products.length > 0) {
+            const renderedItems = products
+                .sort((a, b) => (a.id > b.id ? 1 : -1))
+                .map((item) => {
+                    return (
+                        <Shoe
+                            key={item.title}
+                            prod={products}
+                            product={products[item.id]}
+                            price={item.price}
+                            title={item.title}
+                            img={item.image}
+                            id={item.id}
+                        />
+                    )
+                })
+
+            setList(renderedItems)
+            setInitialState(renderedItems)
+        }
+    }, [fetched])
 
     const searchItems = (e) => {
         setSearched(false)
@@ -81,29 +96,92 @@ const Shop = ({ items }) => {
     }
 
     const dropDownFiltering = (e) => {
-        setFilterBySelect(e.target.value)
-        switch (filterBySelect) {
+        switch (e.target.value) {
             case 'alphabet':
-                console.log('okay dat is alpha')
                 setSearched(true)
-                const sortByAlphabet = products.sort((i) => i.title)
-                return setFiltered(sortByAlphabet)
+                let filterByAlph = products
+                    .sort((i, b) => (i.title > b.title ? 1 : -1))
+                    .map((item) => {
+                        return (
+                            <Shoe
+                                key={item.title}
+                                prod={products}
+                                product={products[item.id]}
+                                price={item.price}
+                                title={item.title}
+                                img={item.image}
+                                id={item.id}
+                            />
+                        )
+                    })
+                setFiltered(filterByAlph)
+                break
             case 'reverse':
                 setSearched(true)
-                const sortByReverseAlphabet = products
-                    .reverse()
-                    .sort((i) => i.title)
-
-                return setFiltered(sortByReverseAlphabet)
+                let filterByReverseAlph = products
+                    .sort((i, b) => (i.title < b.title ? 1 : -1))
+                    .map((item) => {
+                        return (
+                            <Shoe
+                                key={item.title}
+                                prod={products}
+                                product={products[item.id]}
+                                price={item.price}
+                                title={item.title}
+                                img={item.image}
+                                id={item.id}
+                            />
+                        )
+                    })
+                setFiltered(filterByReverseAlph)
+                break
             case 'low':
                 setSearched(true)
-                const sortByLowPrice = list.sort(function (a, b) {
-                    return a.props.price - b.props.price
-                })
-                console.log(sortByLowPrice)
-                setFiltered(sortByLowPrice)
+                let filterByLowPrice = products
+                    .sort(function (a, b) {
+                        let firstValue = parseInt(a.price),
+                            secondValue = parseInt(b.price)
+                        return firstValue - secondValue
+                    })
+                    .map((item) => {
+                        return (
+                            <Shoe
+                                key={item.title}
+                                prod={products}
+                                product={products[item.id]}
+                                price={item.price}
+                                title={item.title}
+                                img={item.image}
+                                id={item.id}
+                            />
+                        )
+                    })
+                setFiltered(filterByLowPrice)
                 break
-            default:
+            case 'high':
+                setSearched(true)
+                let filterByHighPrice = products
+                    .sort(function (a, b) {
+                        let firstValue = parseInt(a.price),
+                            secondValue = parseInt(b.price)
+                        return secondValue - firstValue
+                    })
+                    .map((item) => {
+                        return (
+                            <Shoe
+                                key={item.title}
+                                prod={products}
+                                product={products[item.id]}
+                                price={item.price}
+                                title={item.title}
+                                img={item.image}
+                                id={item.id}
+                            />
+                        )
+                    })
+                setFiltered(filterByHighPrice)
+                break
+            case 'default':
                 return setSearched(false)
         }
     }
@@ -135,6 +213,7 @@ const Shop = ({ items }) => {
                     className='ui dropdown shop-dropdown'
                     onChange={(e) => dropDownFiltering(e)}
                 >
+                    <option value='default'>Default</option>
                     <option value='alphabet'>Sort by A-Z</option>
                     <option value='reverse'>Sort by Z-A</option>
                     <option value='low'>Sort by low price</option>
@@ -148,4 +227,8 @@ const Shop = ({ items }) => {
     )
 }
 
-export default Shop
+const mapStateToProps = (state) => {
+    return { items: state.init }
+}
+
+export default connect(mapStateToProps, null)(Shop)

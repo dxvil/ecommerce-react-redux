@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 const Nav = ({ products }) => {
     const [quantity, setQuantity] = useState(0)
-    const [basket, setBasket] = useState(products)
 
     useEffect(() => {
         if (products.length !== 0) {

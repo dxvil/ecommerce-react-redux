@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Shop.css'
 import './Shoe/Shoe.css'
 import Shoe from './Shoe/Shoe'
-import { Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 const Shop = ({ items }) => {
@@ -13,8 +12,6 @@ const Shop = ({ items }) => {
     const [filtered, setFiltered] = useState([])
     const [search, setSearch] = useState('')
     const [isSearched, setSearched] = useState(false)
-    const [initialState, setInitialState] = useState('')
-    const [filterBySelect, setFilterBySelect] = useState('')
 
     useEffect(() => {
         if (items.length > 0) {
@@ -34,7 +31,6 @@ const Shop = ({ items }) => {
                         <Shoe
                             key={item.title}
                             prod={products}
-                            product={products[item.id]}
                             price={item.price}
                             title={item.title}
                             img={item.image}
@@ -44,7 +40,6 @@ const Shop = ({ items }) => {
                 })
 
             setList(renderedItems)
-            setInitialState(renderedItems)
         }
     }, [fetched])
 
@@ -56,7 +51,7 @@ const Shop = ({ items }) => {
             searchingValues = list.filter((item) =>
                 item.key.toLowerCase().includes(search)
             )
-        } else if(isSearched) {
+        } else if (isSearched) {
             searchingValues = filtered.filter((item) =>
                 item.key.toLowerCase().includes(search)
             )
@@ -82,24 +77,25 @@ const Shop = ({ items }) => {
             }, 1000)
         }
         //if no matches
-            if (searchingValues.length === 0) {
-                let error = (
-                    <div className='ui icon message search-message'>
-                        <div className='header'>
-                            <i className='x icon'></i>
-                            <p>The product is not found.</p>
-                        </div>
+        if (searchingValues.length === 0) {
+            let error = (
+                <div className='ui icon message search-message'>
+                    <div className='header'>
+                        <i className='x icon' />
+                        <p>The product is not found.</p>
                     </div>
-                )
-                setSearched(true)
-                setFiltered(error)
-                return setTimeout(() => {
-                    setSearch('')
-                }, 1000)
-            }
+                </div>
+            )
+            setSearched(true)
+            setFiltered(error)
+            return setTimeout(() => {
+                setSearch('')
+            }, 1000)
+        }
     }
 
     const dropDownFiltering = (e) => {
+        // eslint-disable-next-line default-case
         switch (e.target.value) {
             case 'alphabet':
                 setSearched(true)
@@ -190,13 +186,6 @@ const Shop = ({ items }) => {
         }
     }
 
-    const loader = () => {
-        if (isSearched) {
-            return <Loader />
-        } else {
-            return null
-        }
-    }
     return (
         <div className='shop'>
             <header className='shop-header'>
@@ -205,7 +194,7 @@ const Shop = ({ items }) => {
                     className='circular ui icon button shop-undo-btn'
                     onClick={() => setSearched(false)}
                 >
-                    <i className='icon undo'></i>
+                    <i className='icon undo' />
                 </button>
                 <input
                     className='shop-header__search-shoes'

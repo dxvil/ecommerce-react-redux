@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Basket.css'
 import { connect } from 'react-redux'
-import * as actionCreators from '../../redux/actions'
 
-class Basket extends React.Component {
-    constructor(props) {
-        super(props)
-        this.conditionalRendering = this.conditionalRendering.bind(this)
-        this.renderOrder = this.renderOrder.bind(this)
-        this.state = {
-            basket: props.products,
+function Basket(props) {
+    let [basket, setBasket] = useState(props.products),
+        [totalPrice, setTotalPrice] = useState(0)
+
+    useEffect(() => {
+        if (basket.length > 0) {
+            let total = basket.reduce((prev, next) => {
+                return prev + parseInt(next.price) * next.quantity
+            }, 0)
+            console.log(total)
+            setTotalPrice(total)
         }
-    }
+    }, [basket])
 
-    renderOrder = (order) => {
+    const renderOrder = (order) => {
         return order.map((item) => {
             return (
                 <div key={item.title} className='basket__product'>
@@ -29,32 +32,28 @@ class Basket extends React.Component {
         })
     }
 
-    conditionalRendering = () => {
-        if (this.state.basket.length === 0) {
+    const conditionalRendering = () => {
+        if (basket.length === 0) {
             return <p>Your basket is empty</p>
-        } else if (this.state.basket.length >= 1) {
+        } else if (basket.length >= 1) {
             return (
                 <>
-                    {this.renderOrder(this.state.basket)}
-                    <div className='basket__price'>Total price: 300 eur</div>
+                    {renderOrder(basket)}
+                    <div className='basket__price'>{totalPrice} Euro</div>
                 </>
             )
         }
     }
 
-    render() {
-        return (
-            <div className='basket'>
-                <div className='basket__order'>
-                    {this.conditionalRendering()}
-                </div>
-            </div>
-        )
-    }
+    return (
+        <div className='basket'>
+            <div className='basket__order'>{conditionalRendering()}</div>
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => {
     return { products: state.products }
 }
 
-export default connect(mapStateToProps, actionCreators)(Basket)
+export default connect(mapStateToProps, null)(Basket)

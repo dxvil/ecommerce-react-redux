@@ -3,6 +3,7 @@ import './Nav.css'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.png'
 import { connect } from 'react-redux'
+import { appHistory } from '../App/App'
 
 const Nav = ({ products }) => {
     const [quantity, setQuantity] = useState(0)
@@ -16,6 +17,10 @@ const Nav = ({ products }) => {
         }
     })
 
+    const refreshRoute = () => {
+        appHistory.push({ pathname: '/' })
+    }
+
     const NavStyle = {
         listStyle: 'none',
         color: '#000',
@@ -24,6 +29,10 @@ const Nav = ({ products }) => {
 
     return (
         <nav className='navbar'>
+            <Link to={'/registration'}>
+                <h2>Log in</h2>
+            </Link>
+
             <img alt='...' className='nav__logo' src={logo} />
             <ul className='navbar__items'>
                 <Link to='/' style={NavStyle}>
@@ -33,7 +42,7 @@ const Nav = ({ products }) => {
                     <li>Shop</li>
                 </Link>
                 <Link to='/basket'>
-                    <li className='nav__cart'>
+                    <li className='nav__cart' onClick={refreshRoute}>
                         <i className='icon shopping cart'></i>
                     </li>
                 </Link>

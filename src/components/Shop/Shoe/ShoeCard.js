@@ -152,7 +152,9 @@ class ShoeCard extends React.Component {
                             -
                         </button>
                     </div>
-                    {alert ? <Alert text={'Choose a size, please'} /> : null}
+                    {alert === true ? (
+                        <Alert text={'Choose a size, please'} />
+                    ) : null}
                     <p className='product-details__price'>
                         {renderingItem.price}
                     </p>
@@ -207,7 +209,6 @@ class ShoeCard extends React.Component {
     }
 
     refreshRoute = () => {
-        console.log(appHistory)
         appHistory.push({ pathname: '/' })
     }
 
@@ -240,16 +241,23 @@ class ShoeCard extends React.Component {
                 }
             }
             this.props.addItem(itemWithSize)
-        } else {
-            //do alert logic
         }
+        this.setState({
+            alert: true,
+        })
     }
 
     sizeReduxRemover = (e) => {
         if (this.state.fromDatabase) {
-            this.props.removeItem(this.state.items[this.state.itemId].item)
+            let item = this.state.items.find(
+                (item) => item.item.id === this.state.itemId
+            )
+            this.props.removeItem(item)
         } else if (this.state.fromShop) {
-            this.props.removeItem(this.state.items[this.state.itemId])
+            let item = this.state.items.find(
+                (item) => item.id === this.state.itemId
+            )
+            this.props.removeItem(item)
         }
     }
     render() {

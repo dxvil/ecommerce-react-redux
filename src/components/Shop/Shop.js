@@ -55,9 +55,11 @@ const Shop = ({ items }) => {
             searchingValues = filtered.filter((item) =>
                 item.key.toLowerCase().includes(search)
             )
+        } else {
+            searchingValues = undefined
         }
         //if matches
-        if (searchingValues.length !== 0) {
+        if (!(searchingValues.length === 0 && false)) {
             searchingValues.map((item) => {
                 return (
                     <Shoe

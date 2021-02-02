@@ -1,5 +1,6 @@
 import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { connect } from 'react-redux'
 import Nav from '../Nav/Nav'
 import './App.css'
@@ -9,6 +10,8 @@ import * as actionCreators from '../../redux/actions'
 import Basket from '../Basket/Basket'
 import ShoeCard from '../Shop/Shoe/ShoeCard'
 import { db, setProductsToDatabase } from '../../firebase/Firebase'
+
+export const appHistory = createBrowserHistory()
 
 class App extends React.Component {
     constructor(props) {
@@ -50,7 +53,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <HashRouter>
+            <HashRouter history={appHistory}>
                 <div className='App'>
                     <Nav />
                     <Switch>

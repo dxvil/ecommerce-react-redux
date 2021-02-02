@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../../redux/actions'
 import Alert from '../../vidgets/Alert'
 import { db } from '../../../firebase/Firebase'
-import { Link } from 'react-router-dom'
+import { HashRouter, Link } from 'react-router-dom'
 import LoaderText from '../../SemanticUI/Loader'
+import { appHistory } from '../../App/App'
 
 class ShoeCard extends React.Component {
     constructor(props) {
@@ -169,6 +170,7 @@ class ShoeCard extends React.Component {
 
     changeItemToPrevious = () => {
         if (this.state.itemId !== 1) {
+            appHistory.push(`/shoe/item/${this.state.itemId - 1}`)
             this.setState((prevState) => ({
                 itemId: prevState.itemId - 1,
             }))
@@ -187,6 +189,7 @@ class ShoeCard extends React.Component {
 
     changeItemToNext = () => {
         if (this.state.itemId !== 10) {
+            appHistory.push(`/shoe/item/${this.state.itemId + 1}`)
             this.setState((prevState) => ({
                 itemId: prevState.itemId + 1,
             }))
@@ -203,6 +206,11 @@ class ShoeCard extends React.Component {
         }
     }
 
+    refreshRoute = () => {
+        console.log(appHistory)
+        appHistory.push({ pathname: '/' })
+    }
+
     sizeHandler = (s) => {
         if (s !== undefined) {
             this.setState({
@@ -215,23 +223,22 @@ class ShoeCard extends React.Component {
         if (this.state.size !== null && !isNaN(this.state.size)) {
             let itemWithSize = {}
             if (this.state.fromDatabase) {
+                let item = this.state.items.find(
+                    (item) => item.item.id === this.state.itemId
+                )
                 itemWithSize = {
-                    ...this.state.items[this.state.itemId].item,
-                    size: [
-                        ...this.state.items[this.state.itemId].item.size,
-                        this.state.size,
-                    ],
+                    ...item.item,
+                    size: [...item.item.size, this.state.size],
                 }
             } else if (this.state.fromShop) {
+                let item = this.state.items.find(
+                    (i) => i.id === this.state.itemId
+                )
                 itemWithSize = {
-                    ...this.state.items[this.state.itemId],
-                    size: [
-                        ...this.state.items[this.state.itemId].size,
-                        this.state.size,
-                    ],
+                    ...item,
+                    size: [...item.size, this.state.size],
                 }
             }
-            console.log(itemWithSize)
             this.props.addItem(itemWithSize)
         } else {
             //do alert logic
@@ -264,7 +271,10 @@ class ShoeCard extends React.Component {
                     </button>
                 </div>
                 <Link to={'/shop'}>
-                    <button className='ui inverted brown basic button back-btn'>
+                    <button
+                        className='ui inverted brown basic button back-btn'
+                        onClick={this.refreshRoute}
+                    >
                         Back to Shop
                     </button>
                 </Link>

@@ -28,3 +28,11 @@ yarn-error.log*
 /public
 /api
 /.vercel
+debug.log
+build
+public
+api
+.eslintcache
+.nowignore
+.prettierrc.json
+package-lock.json

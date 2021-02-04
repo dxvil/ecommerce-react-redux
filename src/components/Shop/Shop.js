@@ -3,8 +3,20 @@ import './Shop.css'
 import './Shoe/Shoe.css'
 import Shoe from './Shoe/Shoe'
 import { connect } from 'react-redux'
+import {
+    filterShopByAlphabet,
+    filterShopByHighPrice,
+    filterShopByLowPrice,
+    filterShopReverse,
+} from '../../redux/actions'
 
-const Shop = ({ items }) => {
+const Shop = ({
+    items,
+    filterShopByAlphabet,
+    filterShopReverse,
+    filterShopByLowPrice,
+    filterShopByHighPrice,
+}) => {
     // eslint-disable-next-line no-unused-vars
     const [products, setProducts] = useState([])
     const [fetched, setFetched] = useState(false)
@@ -101,6 +113,7 @@ const Shop = ({ items }) => {
         switch (e.target.value) {
             case 'alphabet':
                 setSearched(true)
+                filterShopByAlphabet(true)
                 let filterByAlph = products
                     .sort((i, b) => (i.title > b.title ? 1 : -1))
                     .map((item) => {
@@ -120,6 +133,7 @@ const Shop = ({ items }) => {
                 break
             case 'reverse':
                 setSearched(true)
+                filterShopReverse(true)
                 let filterByReverseAlph = products
                     .sort((i, b) => (i.title < b.title ? 1 : -1))
                     .map((item) => {
@@ -139,6 +153,7 @@ const Shop = ({ items }) => {
                 break
             case 'low':
                 setSearched(true)
+                filterShopByLowPrice(true)
                 let filterByLowPrice = products
                     .sort(function (a, b) {
                         let firstValue = parseInt(a.price),
@@ -162,6 +177,7 @@ const Shop = ({ items }) => {
                 break
             case 'high':
                 setSearched(true)
+                filterShopByHighPrice(true)
                 let filterByHighPrice = products
                     .sort(function (a, b) {
                         let firstValue = parseInt(a.price),
@@ -184,6 +200,10 @@ const Shop = ({ items }) => {
                 setFiltered(filterByHighPrice)
                 break
             case 'default':
+                filterShopByHighPrice(false)
+                filterShopReverse(false)
+                filterShopByAlphabet(false)
+                filterShopByLowPrice(false)
                 return setSearched(false)
         }
     }
@@ -223,7 +243,24 @@ const Shop = ({ items }) => {
 }
 
 const mapStateToProps = (state) => {
-    return { items: state.init }
+    return { items: state.init, filters: state.filters }
 }
 
-export default connect(mapStateToProps, null)(Shop)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        filterShopByAlphabet: (flag) => {
+            dispatch(filterShopByAlphabet(flag))
+        },
+        filterShopReverse: (flag) => {
+            dispatch(filterShopReverse(flag))
+        },
+        filterShopByLowPrice: (flag) => {
+            dispatch(filterShopByLowPrice(flag))
+        },
+        filterShopByHighPrice: (flag) => {
+            dispatch(filterShopByHighPrice(flag))
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop)

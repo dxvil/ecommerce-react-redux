@@ -252,12 +252,12 @@ class ShoeCard extends React.Component {
             let item = this.state.items.find(
                 (item) => item.item.id === this.state.itemId
             )
-            this.props.removeItem(item)
+            this.props.removeItem(item.item.id)
         } else if (this.state.fromShop) {
             let item = this.state.items.find(
                 (item) => item.id === this.state.itemId
             )
-            this.props.removeItem(item)
+            this.props.removeItem(item.id)
         }
     }
     render() {

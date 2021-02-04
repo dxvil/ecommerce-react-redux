@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Basket.css'
 import { connect } from 'react-redux'
+import { removeItem } from '../../redux/actions'
 
 function Basket(props) {
     let [basket, setBasket] = useState(props.products),
@@ -11,15 +12,22 @@ function Basket(props) {
             let total = basket.reduce((prev, next) => {
                 return prev + parseInt(next.price) * next.quantity
             }, 0)
-            console.log(total)
             setTotalPrice(total)
         }
     }, [basket])
+
+    const removeFromBasket = (id) => {
+        props.removeItem(id)
+    }
 
     const renderOrder = (order) => {
         return order.map((item) => {
             return (
                 <div key={item.title} className='basket__product'>
+                    <i
+                        className='close icon'
+                        onClick={() => removeFromBasket(item.id)}
+                    />
                     <img src={item.image} alt={item.title} />
                     <p className='basket__product-info'>{item.title}</p>
                     <p className='basket__product-info'>Price: {item.price}</p>
@@ -56,4 +64,11 @@ const mapStateToProps = (state) => {
     return { products: state.products }
 }
 
-export default connect(mapStateToProps, null)(Basket)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeItem: (item) => {
+            dispatch(removeItem(item))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Basket)

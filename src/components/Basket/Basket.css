@@ -74,3 +74,10 @@
     font-size: 15px;
     margin: 5px 0;
 }
+
+.basket__product .close{
+   display: flex;
+    align-self: flex-end;
+    color: red;
+    font-size: 20px;
+}

@@ -25,4 +25,6 @@ yarn-error.log*
 .vercel
 
 /build
-.vercel
+/public
+/api
+/.vercel

@@ -12,6 +12,7 @@ const Shoe = ({ title, price, img, id, addItem, prod }) => {
 
     const buyShoe = () => {
         let shoe = prod.find((item) => item.id === id)
+        shoe.size = [...shoe.size, 37]
         addItem(shoe)
         //change to not so many renders!
     }

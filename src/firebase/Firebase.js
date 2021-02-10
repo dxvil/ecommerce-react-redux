@@ -4,7 +4,11 @@ import 'firebase/auth'
 import { firebaseConfig } from './firebaseConfig'
 import { products } from './items'
 
-firebase.initializeApp(firebaseConfig)
+export const init = () => {
+    firebase.initializeApp(firebaseConfig)
+}
+
+init()
 
 export const db = firebase.firestore()
 

@@ -5,7 +5,8 @@ import { removeItem } from '../../redux/actions'
 
 function Basket(props) {
     let [basket, setBasket] = useState(props.products),
-        [totalPrice, setTotalPrice] = useState(0)
+        [totalPrice, setTotalPrice] = useState(0),
+        [itemToDelete, setItemToDelete] = useState(null)
 
     useEffect(() => {
         if (basket.length > 0) {
@@ -16,18 +17,17 @@ function Basket(props) {
         }
     }, [basket])
 
-    const removeFromBasket = (id) => {
-        props.removeItem(id)
-    }
+    useEffect(() => {
+        if (itemToDelete) {
+            props.removeItem(itemToDelete)
+        }
+    }, [itemToDelete])
 
     const renderOrder = (order) => {
         return order.map((item) => {
             return (
                 <div key={item.title} className='basket__product'>
-                    <i
-                        className='close icon'
-                        onClick={() => removeFromBasket(item.id)}
-                    />
+                    <i className='close icon' />
                     <img src={item.image} alt={item.title} />
                     <p className='basket__product-info'>{item.title}</p>
                     <p className='basket__product-info'>Price: {item.price}</p>

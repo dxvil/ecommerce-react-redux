@@ -1,12 +1,57 @@
-import React from 'react';
+import React from 'react'
 import './Homepage.css'
 
 const Homepage = () => {
-  return (
-      <div className="home">
-        <h1 className="main-title unselectable">Best shoes</h1>
-      </div>
-  )
-};
+    return (
+        <div className='home'>
+            <h1 className='main-title'>Buy a shoes!</h1>
+            <div className='ui piled segment'>
+                <h4 className='ui header'>We want you to be the best</h4>
+                <p>
+                    У нас есть ограниченное количество предложений. Наши товары
+                    - редкая находка.
+                </p>
+                <p>
+                    Если успеешь - оторвешь себе бомбические модели кроссовок.
+                </p>
+                <p>
+                    Цены остались прежними - это большое преимущество. Покупая у
+                    нас - ты покупаешь по цене производителя, которую он
+                    установил в момент выхода модели! Все честно.
+                </p>
+            </div>
+            <div className='ui piled segment'>
+                <h4 className='ui header'>We want you to be the best</h4>
+                <p>
+                    У нас есть ограниченное количество предложений. Наши товары
+                    - редкая находка.
+                </p>
+                <p>
+                    Если успеешь - оторвешь себе бомбические модели кроссовок.
+                </p>
+                <p>
+                    Цены остались прежними - это большое преимущество. Покупая у
+                    нас - ты покупаешь по цене производителя, которую он
+                    установил в момент выхода модели! Все честно.
+                </p>
+            </div>
+            <div className='ui piled segment'>
+                <h4 className='ui header'>We want you to be the best</h4>
+                <p>
+                    У нас есть ограниченное количество предложений. Наши товары
+                    - редкая находка.
+                </p>
+                <p>
+                    Если успеешь - оторвешь себе бомбические модели кроссовок.
+                </p>
+                <p>
+                    Цены остались прежними - это большое преимущество. Покупая у
+                    нас - ты покупаешь по цене производителя, которую он
+                    установил в момент выхода модели! Все честно.
+                </p>
+            </div>
+        </div>
+    )
+}
 
-export default Homepage;
+export default Homepage

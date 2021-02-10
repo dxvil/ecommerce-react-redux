@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #000;
+    background-color: #F8D4BD;
+    background-image: url("https://cdn.dribbble.com/users/2083388/screenshots/10479375/media/4fbdfb92a7fd081c65c1954232c331b5.jpg");
     width: 100%;
     min-height: 100vh;
     height: fit-content;

@@ -7,6 +7,12 @@ import { db } from '../../../firebase/Firebase'
 import { HashRouter, Link } from 'react-router-dom'
 import LoaderText from '../../SemanticUI/Loader'
 import { appHistory } from '../../App/App'
+import {
+    addItem,
+    decreaseQuantity,
+    increaseQuantity,
+    removeItem,
+} from '../../../redux/actions'
 
 class ShoeCard extends React.Component {
     constructor(props) {
@@ -62,15 +68,8 @@ class ShoeCard extends React.Component {
 
     renderI = () => {
         let id = this.state.itemId,
-            item
-        let renderingItem
-        if (this.state.fromDatabase === true) {
             item = this.state.items.find((i) => i.item.id === id)
-            renderingItem = item.item
-        } else if (this.state.fromShop === true) {
-            item = this.state.items.find((i) => i.id === id)
-            renderingItem = item
-        }
+        let renderingItem = item.item
 
         return (
             <div className='product-details'>
@@ -149,7 +148,7 @@ class ShoeCard extends React.Component {
                             className='shoe-btn remove-btn'
                             onClick={(e) => this.sizeReduxRemover(e)}
                         >
-                            -
+                            <i className='icon trash'></i>
                         </button>
                     </div>
                     {alert === true ? (
@@ -222,24 +221,15 @@ class ShoeCard extends React.Component {
 
     sizeReduxHandler = () => {
         if (this.state.size !== null && !isNaN(this.state.size)) {
-            let itemWithSize = {}
-            if (this.state.fromDatabase) {
-                let item = this.state.items.find(
-                    (item) => item.item.id === this.state.itemId
-                )
-                itemWithSize = {
-                    ...item.item,
-                    size: [...item.item.size, this.state.size],
-                }
-            } else if (this.state.fromShop) {
-                let item = this.state.items.find(
-                    (i) => i.id === this.state.itemId
-                )
-                itemWithSize = {
-                    ...item,
-                    size: [...item.size, this.state.size],
-                }
+            let item = this.state.items.find(
+                (item) => item.item.id === this.state.itemId
+            )
+
+            let itemWithSize = {
+                ...item.item,
+                size: [...item.item.size, this.state.size],
             }
+
             this.props.addItem(itemWithSize)
         }
         this.setState({
@@ -248,18 +238,12 @@ class ShoeCard extends React.Component {
     }
 
     sizeReduxRemover = (e) => {
-        if (this.state.fromDatabase) {
-            let item = this.state.items.find(
-                (item) => item.item.id === this.state.itemId
-            )
-            this.props.removeItem(item.item.id)
-        } else if (this.state.fromShop) {
-            let item = this.state.items.find(
-                (item) => item.id === this.state.itemId
-            )
-            this.props.removeItem(item.id)
-        }
+        let item = this.state.items.find(
+            (item) => item.item.id === this.state.itemId
+        )
+        this.props.removeItem(item.item.id)
     }
+
     render() {
         return (
             <div className='details'>
@@ -293,7 +277,17 @@ class ShoeCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return state
+    return { basket: state.products }
 }
 
-export default connect(mapStateToProps, actionCreators)(ShoeCard)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (item) => {
+            dispatch(addItem(item))
+        },
+        removeItem: (item) => {
+            dispatch(removeItem(item))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ShoeCard)

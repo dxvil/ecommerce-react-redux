@@ -9,7 +9,7 @@ import Shop from '../Shop/Shop'
 import * as actionCreators from '../../redux/actions'
 import Basket from '../Basket/Basket'
 import ShoeCard from '../Shop/Shoe/ShoeCard'
-import { db, setProductsToDatabase } from '../../firebase/Firebase'
+import Auth from '../Auth/Auth'
 
 export const appHistory = createBrowserHistory()
 
@@ -17,37 +17,27 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: [],
+            products: props.init,
             transformedData: [],
         }
     }
 
     componentDidMount() {
-        setProductsToDatabase('products')
+        this.props.updateDb('products')
 
-        db.collection('products')
+        this.props.db
+            .collection('products')
             .get()
             .then((items) => {
-                return items.forEach((item) => {
+                let arr = []
+                items.forEach((item) => {
                     let transformVar = item.data()
-                    this.setState((prevState) => ({
-                        transformedData: [
-                            transformVar.item,
-                            ...prevState.transformedData,
-                        ],
-                    }))
+                    return arr.push(transformVar)
                 })
+                return arr
             })
-            .then(() => {
-                this.setState((prevState) => ({
-                    products: [
-                        ...this.state.transformedData,
-                        ...prevState.products,
-                    ],
-                }))
-            })
-            .then(() => {
-                this.props.initStore(this.state.products)
+            .then((data) => {
+                this.props.initStore(data)
             })
     }
 
@@ -61,6 +51,7 @@ class App extends React.Component {
                         <Route path='/shop' component={() => <Shop />} />
                         <Route path='/basket' component={Basket} />
                         <Route path='/shoe/item/:id' component={ShoeCard} />
+                        <Route path='/auth' component={Auth} />
                     </Switch>
                 </div>
             </HashRouter>
@@ -71,6 +62,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         prods: state.products,
+        init: state.init,
     }
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { addItem } from '../../../redux/actions'
 import { Link } from 'react-router-dom'
+import { addItem, increaseQuantity } from '../../../redux/actions'
 
-const Shoe = ({ title, price, img, id, addItem, prod }) => {
+const Shoe = ({ title, price, img, id, addItem, prod, basket }) => {
     const refContainer = useRef(null)
     const refProduct = useRef(null)
     const refTitle = useRef(null)
@@ -11,10 +11,9 @@ const Shoe = ({ title, price, img, id, addItem, prod }) => {
     const refPic = useRef(null)
 
     const buyShoe = () => {
-        let shoe = prod.find((item) => item.id === id)
-        shoe.size = [...shoe.size, 37]
-        addItem(shoe)
-        //change to not so many renders!
+        let shoe = prod.find((item) => item.item.id === id)
+        shoe.item.size = [...shoe.item.size, 37]
+        addItem(shoe.item)
     }
 
     // useEffect(() => {
@@ -85,7 +84,9 @@ const Shoe = ({ title, price, img, id, addItem, prod }) => {
 }
 
 const mapStateToProps = (state) => {
-    return state
+    return {
+        basket: state.products,
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -29,7 +29,7 @@ const Nav = ({ products }) => {
 
     return (
         <nav className='navbar'>
-            <Link to={'/registration'}>
+            <Link to={'/auth'}>
                 <h2>Log in</h2>
             </Link>
 

@@ -1,4 +1,6 @@
 .details {
+    background-image: url("https://cdn.dribbble.com/users/2131993/screenshots/14142605/media/94f9363ec4fe6ad758c28eaee8d6f872.png");
+   background-size: contain;
     position: relative;
     display: flex;
     align-items: center;

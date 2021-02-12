@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import { productsInitialization } from './initReducer'
+import { initReducer } from './initReducer'
 import { purchaseReducer } from './purchaseReducer'
 import { filterShopReducer } from './filterShopReducer'
 
 export default combineReducers({
-    init: productsInitialization,
+    createdDB: initReducer,
     products: purchaseReducer,
     filters: filterShopReducer,
 })

@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom'
 import App from './components/App/App'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import { db, setProductsToDatabase } from './firebase/Firebase'
+import {
+    db,
+    deleteCollection,
+    setProductsToDatabase,
+} from './firebase/Firebase'
 
 ReactDOM.render(
     <Provider store={store}>
-        <App db={db} updateDb={setProductsToDatabase} />
+        <App cleanDB={deleteCollection} />
     </Provider>,
     document.getElementById('root')
 )

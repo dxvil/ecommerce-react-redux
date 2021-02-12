@@ -10,6 +10,10 @@ import * as actionCreators from '../../redux/actions'
 import Basket from '../Basket/Basket'
 import ShoeCard from '../Shop/Shoe/ShoeCard'
 import Auth from '../Auth/Auth'
+import {
+    createInitMiddleware,
+    initMiddleware,
+} from '../../redux/reducers/initReducer'
 
 export const appHistory = createBrowserHistory()
 
@@ -23,22 +27,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.props.updateDb('products')
-
-        this.props.db
-            .collection('products')
-            .get()
-            .then((items) => {
-                let arr = []
-                items.forEach((item) => {
-                    let transformVar = item.data()
-                    return arr.push(transformVar)
-                })
-                return arr
-            })
-            .then((data) => {
-                this.props.initStore(data)
-            })
+        this.props.cleanDB('products')
+        this.props.createDB('products')
+        this.props.init('products')
     }
 
     render() {
@@ -62,8 +53,18 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         prods: state.products,
-        init: state.init,
+        init: state.createdDB.storeItems,
     }
 }
 
-export default connect(mapStateToProps, actionCreators)(App)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createDB: (path) => {
+            dispatch(createInitMiddleware(path))
+        },
+        init: (path) => {
+            dispatch(initMiddleware(path))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

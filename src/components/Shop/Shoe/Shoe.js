@@ -15,7 +15,7 @@ const Shoe = ({ title, price, img, id, addItem, prod, basket }) => {
         shoe.item.size = [...shoe.item.size, 37]
         addItem(shoe.item)
     }
-
+    console.log('Shoe')
     // useEffect(() => {
     //     refContainer.current.addEventListener('mousemove', (e) => {
     //         const card = refProduct.current

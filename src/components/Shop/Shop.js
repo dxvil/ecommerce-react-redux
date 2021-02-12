@@ -18,21 +18,12 @@ const Shop = ({
     filterShopByHighPrice,
 }) => {
     // eslint-disable-next-line no-unused-vars
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState(items)
     const [fetched, setFetched] = useState(false)
     const [list, setList] = useState([])
     const [filtered, setFiltered] = useState([])
     const [search, setSearch] = useState('')
     const [isSearched, setSearched] = useState(false)
-
-    useEffect(() => {
-        if (items.length > 0) {
-            setProducts(items[0].payload)
-        }
-        if (products.length > 0) {
-            setFetched(true)
-        }
-    })
 
     useEffect(() => {
         if (products.length > 0) {
@@ -218,7 +209,7 @@ const Shop = ({
 }
 
 const mapStateToProps = (state) => {
-    return { items: state.init, filters: state.filters }
+    return { items: state.createdDB.storeItems, filters: state.filters }
 }
 
 const mapDispatchToProps = (dispatch) => {

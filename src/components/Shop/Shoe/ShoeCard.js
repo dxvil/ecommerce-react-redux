@@ -45,6 +45,7 @@ class ShoeCard extends React.Component {
         } else {
             this.getDataFromDatabase()
         }
+        console.log('ShoeCard')
     }
 
     getDataFromDatabase = () => {

@@ -2,7 +2,6 @@ import firebase from 'firebase'
 import 'firebase/database'
 import 'firebase/auth'
 import { firebaseConfig } from './firebaseConfig'
-import { products } from './items'
 
 export const init = () => {
     firebase.initializeApp(firebaseConfig)
@@ -12,7 +11,7 @@ init()
 
 export const db = firebase.firestore()
 
-const deleteCollection = (path) => {
+export const deleteCollection = (path) => {
     db.collection(path)
         .get()
         .then((res) => {
@@ -20,20 +19,4 @@ const deleteCollection = (path) => {
                 item.ref.delete()
             })
         })
-}
-
-export const setProductsToDatabase = (path) => {
-    deleteCollection(path)
-    products.forEach((item) => {
-        db.collection('products')
-            .add({
-                item,
-            })
-            .then(function (docRef) {
-                return docRef
-            })
-            .catch(function (error) {
-                throw new Error(error)
-            })
-    })
 }

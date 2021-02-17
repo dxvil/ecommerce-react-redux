@@ -18,7 +18,7 @@ class ShoeCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: [],
+            items: props.items,
             ready: false,
             size: null,
             alert: false,
@@ -46,25 +46,6 @@ class ShoeCard extends React.Component {
             this.getDataFromDatabase()
         }
         console.log('ShoeCard')
-    }
-
-    getDataFromDatabase = () => {
-        db.collection('products')
-            .get()
-            .then((items) => {
-                let arr = []
-                items.forEach((item) => {
-                    let transformVar = item.data()
-                    arr.push(transformVar)
-                })
-                return arr
-            })
-            .then((data) => {
-                this.setState({
-                    items: data,
-                    fromDatabase: true,
-                })
-            })
     }
 
     renderI = () => {
@@ -278,7 +259,7 @@ class ShoeCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { basket: state.products }
+    return { basket: state.products, items: state.createdDB.storeItems }
 }
 
 const mapDispatchToProps = (dispatch) => {

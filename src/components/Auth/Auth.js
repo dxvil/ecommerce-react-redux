@@ -1,56 +1,42 @@
 import React, { useState } from 'react'
-import 'firebase/auth'
-import firebase from 'firebase'
+import { Field, reduxForm } from 'redux-form'
 
-const Auth = () => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const [status, setStatus] = useState(false)
-    const [user, setUser] = useState(null)
-    const auth = (e, pd) => {
-        if (login !== '' && password !== '') {
-            const log = e.toString()
-            const pass = pd.toString()
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(log, pass)
-                .then((userCredential) => {
-                    // Signed in
-                    const ur = userCredential.user
-                    setStatus(true)
-                })
-                .catch((error) => {
-                    const errorCode = error.code
-                    const errorMessage = error.message
-                    // ..
-                })
-        }
-    }
+const Auth = (props) => {
+    // const auth = (e, pd) => {
+    //
+    // }
 
     return (
         <div>
-            {status === true ? (
-                'Hello, world!'
-            ) : (
-                <form>
-                    Auth
-                    <label>Email: </label>
-                    <input
-                        value={login}
-                        onInput={(e) => setLogin(e.target.value)}
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    <Field
+                        placeholder='email'
+                        name='email'
+                        type='text'
+                        component={'input'}
                     />
-                    <label>Password: </label>
-                    <input
-                        value={password}
-                        onInput={(e) => setPassword(e.target.value)}
+                </div>
+                <div>
+                    <Field
+                        placeholder='login'
+                        name='login'
+                        component={'input'}
                     />
-                    <button type='submit' onClick={() => auth(login, password)}>
-                        Submit
-                    </button>
-                </form>
-            )}
+                </div>
+                <div>
+                    <Field
+                        placeholder='password'
+                        name='password'
+                        component={'input'}
+                    />
+                </div>
+                <button onClick={props.onSubmit}>Submit</button>
+            </form>
         </div>
     )
 }
 
-export default Auth
+const FormAuth = reduxForm({ form: 'login' })(Auth)
+
+export default FormAuth

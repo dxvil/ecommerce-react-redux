@@ -14,6 +14,7 @@ import {
     createInitMiddleware,
     initMiddleware,
 } from '../../redux/reducers/initReducer'
+import AuthPage from '../Auth/AuthPage'
 
 export const appHistory = createBrowserHistory()
 
@@ -42,7 +43,7 @@ class App extends React.Component {
                         <Route path='/shop' component={() => <Shop />} />
                         <Route path='/basket' component={Basket} />
                         <Route path='/shoe/item/:id' component={ShoeCard} />
-                        <Route path='/auth' component={Auth} />
+                        <Route path='/auth' component={AuthPage} />
                     </Switch>
                 </div>
             </HashRouter>

@@ -7,6 +7,8 @@ export const FILTER_SHOP_ALPHABET = 'FILTER_SHOP_ALPHABET'
 export const FILTER_SHOP_REVERSE = 'FILTER_SHOP_REVERSE'
 export const FILTER_SHOP_LOW_TO_HIGH = 'FILTER_SHOP_LOW_TO_HIGH'
 export const FILTER_SHOP_HIGH_TO_LOW = 'FILTER_SHOP_HIGH_TO_LOW'
+export const CREATE_USER_ACCOUNT = 'CREATE_USER_ACCOUNT'
+export const SET_USER_NAME = 'SET_USER_NAME'
 
 export function initFirebaseStore(boolean) {
     return {
@@ -68,5 +70,19 @@ export function filterShopByHighPrice(flag) {
     return {
         type: FILTER_SHOP_HIGH_TO_LOW,
         payload: flag,
+    }
+}
+
+export function createUserAccount(payload) {
+    return {
+        type: CREATE_USER_ACCOUNT,
+        payload,
+    }
+}
+
+export function setUserName(name) {
+    return {
+        type: SET_USER_NAME,
+        payload: name,
     }
 }

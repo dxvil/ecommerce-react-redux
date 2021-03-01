@@ -16,35 +16,6 @@ const Shoe = ({ title, price, img, id, addItem, prod, basket }) => {
         addItem(shoe.item)
     }
     console.log('Shoe')
-    // useEffect(() => {
-    //     refContainer.current.addEventListener('mousemove', (e) => {
-    //         const card = refProduct.current
-    //         card.style.transform = `rotateX(3deg)`
-    //     })
-    //     refContainer.current.addEventListener('mouseenter', () => {
-    //         const card = refProduct.current
-    //
-    //         card.style.transition = 'none'
-    //         const title = refTitle.current
-    //         title.style.transform = 'translateZ(150px)'
-    //         const price = refPrice.current
-    //         price.style.transform = 'translateZ(120px)'
-    //         const pic = refPic.current
-    //         pic.style.transform = 'translateZ(200px) rotateZ(-15deg)'
-    //     })
-    //
-    //     refContainer.current.addEventListener('mouseleave', () => {
-    //         const card = refProduct.current
-    //         card.style.transform = `rotateY(0deg) rotateX(0deg)`
-    //         card.style.transition = 'all 0.5s ease'
-    //         const title = refTitle.current
-    //         title.style.transform = 'translateZ(0px)'
-    //         const price = refPrice.current
-    //         price.style.transform = 'translateZ(0px)'
-    //         const pic = refPic.current
-    //         pic.style.transform = 'translateZ(0px)'
-    //     })
-    // }, [])
 
     return (
         <div ref={refContainer} className='container-product'>

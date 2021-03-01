@@ -1,20 +1,22 @@
 import React from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { connect } from 'react-redux'
-import Nav from '../Nav/Nav'
+
 import './App.css'
+
+import Nav from '../Nav/Nav'
 import Homepage from '../Homepage/Homepage'
 import Shop from '../Shop/Shop'
-import * as actionCreators from '../../redux/actions'
 import Basket from '../Basket/Basket'
 import ShoeCard from '../Shop/Shoe/ShoeCard'
-import Auth from '../Auth/Auth'
-import {
-    createInitMiddleware,
-    initMiddleware,
-} from '../../redux/reducers/initReducer'
 import AuthPage from '../Auth/AuthPage'
+
+import { createDBMiddleware } from '../../redux/midllewares/createDBMiddleware'
+import { bindDB } from '../../redux/midllewares/bindDB'
+import GoCheckout from '../Checkout/GoCheckout'
+import Login from '../Auth/Login'
+import { createDatabase } from '../../firebase/Firebase'
 
 export const appHistory = createBrowserHistory()
 
@@ -23,13 +25,12 @@ class App extends React.Component {
         super(props)
         this.state = {
             products: props.init,
-            transformedData: [],
         }
     }
 
     componentDidMount() {
         this.props.cleanDB('products')
-        this.props.createDB('products')
+        this.props.createDB(createDatabase, 'products')
         this.props.init('products')
     }
 
@@ -44,6 +45,8 @@ class App extends React.Component {
                         <Route path='/basket' component={Basket} />
                         <Route path='/shoe/item/:id' component={ShoeCard} />
                         <Route path='/auth' component={AuthPage} />
+                        <Route path='/gocheckout' component={GoCheckout} />
+                        <Route path='/login' component={Login} />
                     </Switch>
                 </div>
             </HashRouter>
@@ -60,11 +63,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createDB: (path) => {
-            dispatch(createInitMiddleware(path))
+        createDB: (firebaseCallback, path) => {
+            dispatch(createDBMiddleware(firebaseCallback, path))
         },
         init: (path) => {
-            dispatch(initMiddleware(path))
+            dispatch(bindDB(path))
         },
     }
 }

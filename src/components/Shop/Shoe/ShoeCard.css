@@ -1,13 +1,12 @@
 .details {
-    background-image: url("https://cdn.dribbble.com/users/2131993/screenshots/14142605/media/94f9363ec4fe6ad758c28eaee8d6f872.png");
-   background-size: contain;
     position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    background-color: #000;
+    background: #000 url("../../../images/home.png") no-repeat;
+    background-size: 100%;
     color: #fff;
 }
 
@@ -17,7 +16,7 @@
     color: #000;
     width: 70%;
     height: 70%;
-    background-color: #ffd694;
+    background-color: #C0C0C0;
     border-radius: 50px;
 }
 .product-details__header, .product-details__view {
@@ -58,9 +57,9 @@
     justify-content: center;
     width: 300px;
     height: 300px;
-    background-color: #fff1bc;
+    background-color: #174690;
     border-radius: 50%;
-    box-shadow: 4px 4px 10px 3px #fff;
+    box-shadow: 4px 4px 10px 3px #000;
 }
 
 .product-details__more{
@@ -100,17 +99,19 @@
 }
 
 .shoe-btn:hover{
-    color: coral;
+    color: #174679;
     cursor: pointer;
     border: 1px solid #fff;
 }
 
 .shoe-btn:first-child:active {
+    transition: 0.1s linear;
     border: 1px solid #008000;
     color: #008000;
 }
 
 .shoe-btn:last-child:active{
+    transition: 0.1s linear;
     border: 1px solid #ff0000;
     color: #ff0000;
 }
@@ -131,16 +132,16 @@
     height: 40px;
     text-align: center;
     font-weight: bold;
-    background-color: #eac086;
+    background-color: #949597;
     margin: 5px;
 }
 
 .sizes-btn:hover{
-    background-color: #FA8A07;
+    background-color: #174690;
 }
 
 .sizes-btn:active{
-    border: 2px solid #ff4500;
+    border: 2px solid #C0C0C0;
 }
 
 .active-btn-size {

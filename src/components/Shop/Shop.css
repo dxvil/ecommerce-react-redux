@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #F8D4BD;
-    background-image: url("https://cdn.dribbble.com/users/2083388/screenshots/10479375/media/4fbdfb92a7fd081c65c1954232c331b5.jpg");
+    background: #001326 url("../../images/home.png") no-repeat;
+    background-size: 100%;
     width: 100%;
     min-height: 100vh;
     height: fit-content;
@@ -34,7 +34,7 @@
 }
 
 .shop-header {
-    background: 50% 60% gold url("https://cdn.dribbble.com/users/2598141/screenshots/14583810/media/489284a3862e2728949745cbefb191a6.png") no-repeat;
+    background: 50% 60% gold url("../../images/shp.jpg") no-repeat;
 }
 
 .shop-header__title {
@@ -49,13 +49,13 @@
     width: 270px;
     border-radius: 5px;
     border: none;
-    background-color: #F8D4BD;
+    background-color: #C0C0C0;
     font-size: 30px;
     padding: 5px;
 }
 
 .shop-header__search-shoes:focus{
-    background-color: #eac086;
+    background-color: #C0C1;
 }
 
 .shop-undo-btn {

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './Shop.css'
-import './Shoe/Shoe.css'
-import Shoe from './Shoe/Shoe'
 import { connect } from 'react-redux'
 import {
     filterShopByAlphabet,
@@ -9,6 +6,12 @@ import {
     filterShopByLowPrice,
     filterShopReverse,
 } from '../../redux/actions'
+import { Dropdown } from '../vidgets/Dropdown'
+import './Shop.css'
+import './Shoe/Shoe.css'
+import Shoe from './Shoe/Shoe'
+import LoaderText from '../SemanticUI/Loader'
+import { Message } from 'semantic-ui-react'
 
 const Shop = ({
     items,
@@ -22,8 +25,10 @@ const Shop = ({
     const [fetched, setFetched] = useState(false)
     const [list, setList] = useState([])
     const [filtered, setFiltered] = useState([])
-    const [search, setSearch] = useState('')
+    const [searchingValue, setSearchingValue] = useState('')
     const [isSearched, setSearched] = useState(false)
+    const [foundSuccess, setFoundSuccess] = useState(null)
+    const [notFound, setNotFound] = useState(null)
 
     useEffect(() => {
         if (products.length > 0) {
@@ -44,27 +49,39 @@ const Shop = ({
                 })
 
             setList(renderedItems)
+            setFetched(true)
         }
     }, [fetched])
 
-    const searchItems = (e) => {
+    const searchRequest = (e) => {
         setSearched(false)
-        setSearch(e.target.value.toLowerCase())
+        return setSearchingValue(e.target.value.toLowerCase())
+    }
+
+    const findAMatch = () => {
         let searchingValues
-        if (search.length > 1 && !isSearched) {
+        if (!isSearched) {
             searchingValues = list.filter((item) =>
-                item.key.toLowerCase().includes(search)
+                item.key.toLowerCase().includes(searchingValue)
             )
+            debugger
+            if (searchingValues.length === 0) {
+                setNotFound(true)
+                setTimeout(() => setSearchingValue(''), 1000)
+                return setTimeout(() => setNotFound(false), 1500)
+            }
+            setFoundSuccess(searchingValues)
         } else if (isSearched) {
             searchingValues = filtered.filter((item) =>
-                item.key.toLowerCase().includes(search)
+                item.key.toLowerCase().includes(searchingValue)
             )
-        } else {
-            searchingValues = undefined
+            return setFoundSuccess(searchingValues)
         }
-        //if matches
-        if (!(searchingValues.length === 0 && false)) {
-            searchingValues.map((item) => {
+    }
+
+    const renderSearchResults = () => {
+        if (foundSuccess && !isSearched) {
+            foundSuccess.map((item) => {
                 return (
                     <Shoe
                         key={item.props.title}
@@ -77,31 +94,19 @@ const Shop = ({
                 )
             })
             setSearched(true)
-            setFiltered(searchingValues)
-            setTimeout(() => {
-                setSearch('')
-            }, 1000)
-        }
-        //if no matches
-        if (searchingValues.length === 0) {
-            let error = (
-                <div className='ui icon message search-message'>
-                    <div className='header'>
-                        <i className='x icon' />
-                        <p>The product is not found.</p>
-                    </div>
-                </div>
-            )
-            setSearched(true)
-            setFiltered(error)
-            return setTimeout(() => {
-                setSearch('')
-            }, 1000)
+            setFiltered(foundSuccess)
+            return setTimeout(() => setSearchingValue(''), 1000)
         }
     }
 
+    useEffect(() => {
+        if (searchingValue && searchingValue.length > 0) {
+            findAMatch()
+            renderSearchResults()
+        }
+    }, [searchingValue])
+
     const dropDownFiltering = (e) => {
-        // eslint-disable-next-line default-case
         const filterComponent = (item) => {
             return (
                 <Shoe
@@ -174,6 +179,18 @@ const Shop = ({
         }
     }
 
+    const renderByConditions = () => {
+        if (notFound) {
+            return <Message negative>The product is not found.</Message>
+        } else if (fetched === false) {
+            return <LoaderText />
+        } else if (isSearched) {
+            return filtered
+        } else {
+            return list
+        }
+    }
+
     return (
         <div className='shop'>
             <header className='shop-header'>
@@ -187,23 +204,12 @@ const Shop = ({
                 <input
                     className='shop-header__search-shoes'
                     placeholder='Search...'
-                    value={search}
-                    onChange={(e) => searchItems(e)}
+                    value={searchingValue}
+                    onChange={(e) => searchRequest(e)}
                 />
-                <select
-                    className='ui dropdown shop-dropdown'
-                    onChange={(e) => dropDownFiltering(e)}
-                >
-                    <option value='default'>Default</option>
-                    <option value='alphabet'>Sort by A-Z</option>
-                    <option value='reverse'>Sort by Z-A</option>
-                    <option value='low'>Sort by low price</option>
-                    <option value='high'>Sort by high price </option>
-                </select>
+                <Dropdown action={dropDownFiltering} />
             </header>
-            <section className='shop-products'>
-                {isSearched ? filtered : list}
-            </section>
+            <section className='shop-products'>{renderByConditions()}</section>
         </div>
     )
 }

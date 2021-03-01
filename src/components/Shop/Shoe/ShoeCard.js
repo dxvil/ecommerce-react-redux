@@ -1,18 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ShoeCard.css'
 import { connect } from 'react-redux'
-import * as actionCreators from '../../../redux/actions'
-import Alert from '../../vidgets/Alert'
-import { db } from '../../../firebase/Firebase'
-import { HashRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import LoaderText from '../../SemanticUI/Loader'
 import { appHistory } from '../../App/App'
-import {
-    addItem,
-    decreaseQuantity,
-    increaseQuantity,
-    removeItem,
-} from '../../../redux/actions'
+import { addItem, removeItem } from '../../../redux/actions'
 
 class ShoeCard extends React.Component {
     constructor(props) {
@@ -31,21 +23,45 @@ class ShoeCard extends React.Component {
                 fT: 42,
             },
             itemId: parseInt(this.props.match.params.id),
-            fromShop: false,
-            fromDatabase: false,
+            loaded: false,
         }
     }
-
     componentDidMount() {
-        if (this.props.location.state !== undefined) {
+        // refContainer.current.addEventListener('mousemove', (e) => {
+        //     let xAxis = (window.innerWidth / 4 - e.pageX) / 25
+        //     let yAxis = (window.innerHeight / 2 - e.pageY) / 25
+        //     const card = refProduct.current
+        //     card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`
+        // })
+        //
+        // refContainer.current.addEventListener('mouseenter', () => {
+        //     const card = refProduct.current
+        //     card.style.transition = 'none'
+        //     const title = refTitle.current
+        //     title.style.transform = 'translateZ(150px)'
+        //     const price = refPrice.current
+        //     price.style.transform = 'translateZ(120px)'
+        //     const pic = refPic.current
+        //     pic.style.transform = 'translateZ(200px) rotateZ(5deg)'
+        // })
+        //
+        // refContainer.current.addEventListener('mouseleave', () => {
+        //     const card = refProduct.current
+        //     card.style.transform = `rotateY(0deg) rotateX(0deg)`
+        //     card.style.transition = 'all 0.5s ease'
+        //     const title = refTitle.current
+        //     title.style.transform = 'translateZ(0px)'
+        //     const price = refPrice.current
+        //     price.style.transform = 'translateZ(0px)'
+        //     const pic = refPic.current
+        //     pic.style.transform = 'translateZ(0px)'
+        // })
+        //loader
+        if (this.state.items.length !== 0) {
             this.setState({
-                items: this.props.location.state.prods,
-                fromShop: true,
+                loaded: true,
             })
-        } else {
-            this.getDataFromDatabase()
         }
-        console.log('ShoeCard')
     }
 
     renderI = () => {
@@ -133,9 +149,7 @@ class ShoeCard extends React.Component {
                             <i className='icon trash'></i>
                         </button>
                     </div>
-                    {alert === true ? (
-                        <Alert text={'Choose a size, please'} />
-                    ) : null}
+                    {alert === true ? <div>Alert</div> : null}
                     <p className='product-details__price'>
                         {renderingItem.price}
                     </p>
@@ -145,7 +159,7 @@ class ShoeCard extends React.Component {
     }
 
     conditionalRendering = () => {
-        if (this.state.fromShop || this.state.fromDatabase) {
+        if (this.state.loaded) {
             return this.renderI()
         }
         return <LoaderText />
@@ -246,7 +260,7 @@ class ShoeCard extends React.Component {
                 </div>
                 <Link to={'/shop'}>
                     <button
-                        className='ui inverted brown basic button back-btn'
+                        className='ui inverted blue basic button back-btn'
                         onClick={this.refreshRoute}
                     >
                         Back to Shop

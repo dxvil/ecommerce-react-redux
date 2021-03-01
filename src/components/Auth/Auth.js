@@ -1,42 +1,46 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Input as inputUI } from 'semantic-ui-react'
+import { maxLengthCreator, required } from '../../tools/validators'
 
-const Auth = (props) => {
-    // const auth = (e, pd) => {
-    //
-    // }
-
-    return (
-        <div>
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field
-                        placeholder='email'
-                        name='email'
-                        type='text'
-                        component={'input'}
-                    />
+class Auth extends Component {
+    render() {
+        return (
+            <form>
+                <label>Login: </label>
+                <Field
+                    component={inputUI}
+                    placeholder='login'
+                    name='login'
+                    type='text'
+                />
+                <label>Email: </label>
+                <Field
+                    component={inputUI}
+                    placeholder='email'
+                    name='email'
+                    validate={required}
+                    type='email'
+                />
+                <label>Password: </label>
+                <Field
+                    placeholder='password'
+                    name='password'
+                    type='password'
+                    validate={required}
+                    component={inputUI}
+                />
+                <div
+                    className='ui submit button st-btn'
+                    onClick={this.props.onHandleSubmit}
+                >
+                    Submit
                 </div>
-                <div>
-                    <Field
-                        placeholder='login'
-                        name='login'
-                        component={'input'}
-                    />
-                </div>
-                <div>
-                    <Field
-                        placeholder='password'
-                        name='password'
-                        component={'input'}
-                    />
-                </div>
-                <button onClick={props.onSubmit}>Submit</button>
             </form>
-        </div>
-    )
+        )
+    }
 }
 
-const FormAuth = reduxForm({ form: 'login' })(Auth)
+Auth = reduxForm({ form: 'registration' })(Auth)
 
-export default FormAuth
+export default Auth

@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './Nav.css'
 import { Link } from 'react-router-dom'
-import logo from '../../images/logo.png'
 import { connect } from 'react-redux'
 import { appHistory } from '../App/App'
 
-const Nav = ({ products }) => {
+import logo from '../../images/logo.png'
+
+const NavStyle = {
+    listStyle: 'none',
+    color: '#000',
+    textDecoration: 'none',
+}
+
+const refreshRoute = () => {
+    appHistory.push({ pathname: '/' })
+}
+
+const Nav = ({ products, login }) => {
     const [quantity, setQuantity] = useState(0)
+    const [loginName, setLoginName] = useState('')
 
     useEffect(() => {
         if (products.length !== 0) {
@@ -17,23 +29,10 @@ const Nav = ({ products }) => {
         }
     })
 
-    const refreshRoute = () => {
-        appHistory.push({ pathname: '/' })
-    }
-
-    const NavStyle = {
-        listStyle: 'none',
-        color: '#000',
-        textDecoration: 'none',
-    }
-
     return (
         <nav className='navbar'>
-            <Link to={'/auth'}>
-                <h2>Log in</h2>
-            </Link>
-
-            <img alt='...' className='nav__logo' src={logo} />
+            <img alt='logo' className='nav__logo' src={logo} />
+            <Link to='/account'>{loginName.length > 1 ? loginName : null}</Link>
             <ul className='navbar__items'>
                 <Link to='/' style={NavStyle}>
                     <li>Home</li>
@@ -53,7 +52,7 @@ const Nav = ({ products }) => {
 }
 
 const mapStateToProps = (state) => {
-    return { products: state.products }
+    return { products: state.products, login: state.form }
 }
 
 export default connect(mapStateToProps, null)(Nav)

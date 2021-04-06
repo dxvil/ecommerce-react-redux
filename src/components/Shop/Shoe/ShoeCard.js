@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './ShoeCard.css'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -26,38 +26,10 @@ class ShoeCard extends React.Component {
             loaded: false,
         }
     }
+
     componentDidMount() {
-        // refContainer.current.addEventListener('mousemove', (e) => {
-        //     let xAxis = (window.innerWidth / 4 - e.pageX) / 25
-        //     let yAxis = (window.innerHeight / 2 - e.pageY) / 25
-        //     const card = refProduct.current
-        //     card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`
-        // })
-        //
-        // refContainer.current.addEventListener('mouseenter', () => {
-        //     const card = refProduct.current
-        //     card.style.transition = 'none'
-        //     const title = refTitle.current
-        //     title.style.transform = 'translateZ(150px)'
-        //     const price = refPrice.current
-        //     price.style.transform = 'translateZ(120px)'
-        //     const pic = refPic.current
-        //     pic.style.transform = 'translateZ(200px) rotateZ(5deg)'
-        // })
-        //
-        // refContainer.current.addEventListener('mouseleave', () => {
-        //     const card = refProduct.current
-        //     card.style.transform = `rotateY(0deg) rotateX(0deg)`
-        //     card.style.transition = 'all 0.5s ease'
-        //     const title = refTitle.current
-        //     title.style.transform = 'translateZ(0px)'
-        //     const price = refPrice.current
-        //     price.style.transform = 'translateZ(0px)'
-        //     const pic = refPic.current
-        //     pic.style.transform = 'translateZ(0px)'
-        // })
         //loader
-        if (this.state.items.length !== 0) {
+        if (this.props.items.length !== 0) {
             this.setState({
                 loaded: true,
             })

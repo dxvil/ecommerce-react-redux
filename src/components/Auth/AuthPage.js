@@ -17,27 +17,31 @@ const AuthPage = (props) => {
 
     const onHandleSubmit = () => {
         let user = firebase.auth().currentUser
-        if (props.form.values) {
+        if (!user && props.form.values) {
             props.createUser(
                 props.form.values.email,
                 props.form.values.password,
                 props.form.values.login
             )
+        } else if (
+            props.form.values === undefined ||
+            !props.form.values.login ||
+            !props.form.values.password ||
+            !props.form.values.email
+        ) {
+            setMessage('Please, fulfill the form')
+            setAlert(true)
+            setTimeout(() => {
+                setAlert(false)
+            }, 1500)
         } else if (user) {
-            setMessage('The user is already exist')
+            setMessage('The user is already log in')
             setAlert(true)
             setTimeout(() => {
                 setAlert(false)
                 setSignedIn(true)
             }, 1500)
         }
-        // } else {
-        //     setMessage('Please, fulfill the form')
-        //     setAlert(true)
-        //     setTimeout(() => {
-        //         setAlert(false)
-        //     }, 1500)
-        // }
     }
 
     return (
@@ -47,7 +51,7 @@ const AuthPage = (props) => {
                 <FormAuth onHandleSubmit={onHandleSubmit} />
                 <Link to='/login'>Already have an account?</Link>
                 {alert ? <Message negative>{message}</Message> : null}
-                {signedIn ? <Redirect to='/gocheckout' /> : null}
+                {signedIn || props.isLog ? <Redirect to='/gocheckout' /> : null}
             </div>
         </div>
     )
@@ -56,6 +60,7 @@ const AuthPage = (props) => {
 let mapStateToProps = (state) => {
     return {
         form: state.form.registration,
+        isLog: state.login.isLog,
     }
 }
 

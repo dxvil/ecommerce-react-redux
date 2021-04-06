@@ -55,18 +55,15 @@ export const createAccount = (em, pass) => {
     let email = em
     let password = pass
     let user = firebase.auth().currentUser
-
-    if (user.email !== email) {
-        return firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                return { email, password }
-            })
-            .catch((error) => {
-                return error.message
-            })
-    }
+    return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((userData) => {
+            return userData
+        })
+        .catch((error) => {
+            return error.message
+        })
 }
 
 const setUserPassword = (pass) => {

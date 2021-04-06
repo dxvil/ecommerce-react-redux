@@ -6,7 +6,7 @@ import { maxLengthCreator, required } from '../../tools/validators'
 class Auth extends Component {
     render() {
         return (
-            <form>
+            <form className='auth__form'>
                 <label>Login: </label>
                 <Field
                     component={inputUI}

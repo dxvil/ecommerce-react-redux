@@ -1,0 +1,30 @@
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{0}: reset: moving to HEAD@{2}
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{1}: reset: moving to HEAD@{1}
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{2}: reset: moving to HEAD@{2}
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{3}: reset: moving to HEAD@{2}
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{4}: checkout: moving from dev to master
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{5}: checkout: moving from master to dev
+[33mb97872f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m HEAD@{6}: commit: changed package.json
+[33m720ddd7[m HEAD@{7}: commit: reorganized an architecture of app: BLL, DAL, UI. refactored a shop functions.
+[33mfee22c2[m HEAD@{8}: commit: add redux-form to auth component. connect form data with firebase auth in component
+[33m69a9caf[m HEAD@{9}: commit (merge): refactor: firebase code perfomed in thunk middleware
+[33m4b7341b[m HEAD@{10}: commit: added auth with firebase. rewrited purchase reducer
+[33m9c6c941[m HEAD@{11}: commit: change .gitignore config
+[33mc1f9e13[m HEAD@{12}: commit: connected a shop filters with store
+[33m646d809[m HEAD@{13}: commit: add changing url in shoecard
+[33mc321440[m HEAD@{14}: commit: add appHistory and fix pathes in ShoeCard and Shop
+[33m7b746a8[m HEAD@{15}: commit: add sum to basket
+[33mb8a4ab2[m HEAD@{16}: commit: combine search and filters
+[33m97b8c7c[m HEAD@{17}: commit: created a filters for shop
+[33m5fdc54c[m HEAD@{18}: commit: fix some styles
+[33mf1a5fda[m HEAD@{19}: commit: connect firestore with components, added a navigation buttons for shoecard, break big part of shoecard functionality
+[33mbd5663f[m HEAD@{20}: commit: fix bug of shoe animation speed
+[33mcea4329[m HEAD@{21}: commit: added: choose sizes, delete items from basket, alert message if size is not choosed. '
+[33m9091cac[m HEAD@{22}: commit: added more info-shoes sections
+[33m543fd58[m HEAD@{23}: commit: adding a build folder for vercel
+[33m5ec795f[m HEAD@{24}: commit: deploying stage
+[33mcee8850[m HEAD@{25}: commit: added a list of items in the basket section
+[33mc4713bb[m HEAD@{26}: commit: binding a redux store with components
+[33m22ae9e7[m HEAD@{27}: commit: created a basic layout, add some styles. working on creating redux store and combine it with react
+[33mc86cba9[m HEAD@{28}: commit: working on shop page
+[33m38d0e76[m HEAD@{29}: commit (initial): Initialize project using Create React App

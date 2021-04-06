@@ -4,22 +4,15 @@ import { Link } from 'react-router-dom'
 import { addItem, increaseQuantity } from '../../../redux/actions'
 
 const Shoe = ({ title, price, img, id, addItem, prod, basket }) => {
-    const refContainer = useRef(null)
-    const refProduct = useRef(null)
-    const refTitle = useRef(null)
-    const refPrice = useRef(null)
-    const refPic = useRef(null)
-
     const buyShoe = () => {
         let shoe = prod.find((item) => item.item.id === id)
         shoe.item.size = [...shoe.item.size, 37]
         addItem(shoe.item)
     }
-    console.log('Shoe')
 
     return (
-        <div ref={refContainer} className='container-product'>
-            <div ref={refProduct} key={title} className='product'>
+        <div className='container-product'>
+            <div key={title} className='product'>
                 <Link
                     to={{
                         pathname: `shoe/item/${id}`,
@@ -42,13 +35,14 @@ const Shoe = ({ title, price, img, id, addItem, prod, basket }) => {
                     <i className='shopping cart icon' />
                 </button>
                 <div className='shoe-back' />
-                <img ref={refPic} className='shoe-pic' alt={title} src={img} />
-                <p ref={refTitle} className='shoe-title'>
-                    {title}
-                </p>
-                <p ref={refPrice} className='shoe-price'>
-                    {price}
-                </p>
+                <img
+                    className='shoe-pic'
+                    alt={title}
+                    src={img}
+                    loading='lazy'
+                />
+                <p className='shoe-title'>{title}</p>
+                <p className='shoe-price'>{price}</p>
             </div>
         </div>
     )

@@ -29,3 +29,12 @@
     border-radius: 10px;
     box-shadow: 2px 5px 10px 15px #000;
 }
+
+@media (max-device-width:480px){
+.home {
+    background-size: cover;
+}
+    .home .segment{
+        width: 70vw;
+    }
+}

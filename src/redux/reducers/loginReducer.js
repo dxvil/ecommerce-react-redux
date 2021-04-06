@@ -1,18 +1,19 @@
 import { CREATE_USER_ACCOUNT, SET_USER_NAME } from '../actions'
-
-export const loginReducer = (state = {}, { payload, type }) => {
+const initialState = {}
+export const loginReducer = (state = initialState, { payload, type }) => {
     switch (type) {
         case CREATE_USER_ACCOUNT:
-            return (state = {
+            return {
                 ...state,
-                email: payload.email,
-                password: payload.password,
-            })
+                userEmail: payload.email,
+                userPassword: payload.password,
+            }
         case SET_USER_NAME:
-            return (state = {
+            return {
                 ...state,
                 login: payload,
-            })
+                isLog: true,
+            }
         default:
             return state
     }

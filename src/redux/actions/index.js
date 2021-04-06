@@ -76,7 +76,7 @@ export function filterShopByHighPrice(flag) {
 export function createUserAccount(payload) {
     return {
         type: CREATE_USER_ACCOUNT,
-        payload,
+        payload: payload,
     }
 }
 

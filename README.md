@@ -17,3 +17,10 @@ Firebase использована в качестве базы данных, в 
 3. Запустить локальный сервер
 `npm start`
  
+Визуальное представление: 
+
+![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/1.png)
+![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/2.png)
+![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/3.png)
+![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/4.png)
+![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/5.png)

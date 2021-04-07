@@ -9,9 +9,9 @@ import {
 import { Dropdown } from '../vidgets/Dropdown'
 import './Shop.css'
 import './Shoe/Shoe.css'
-import Shoe from './Shoe/Shoe'
 import LoaderText from '../SemanticUI/Loader'
 import { Message } from 'semantic-ui-react'
+import Shoe from './Shoe/Shoe'
 
 const Shop = ({
     items,
@@ -20,7 +20,6 @@ const Shop = ({
     filterShopByLowPrice,
     filterShopByHighPrice,
 }) => {
-    // eslint-disable-next-line no-unused-vars
     const [products, setProducts] = useState(items)
     const [fetched, setFetched] = useState(false)
     const [list, setList] = useState([])
@@ -64,7 +63,6 @@ const Shop = ({
             searchingValues = list.filter((item) =>
                 item.key.toLowerCase().includes(searchingValue)
             )
-            debugger
             if (searchingValues.length === 0) {
                 setNotFound(true)
                 setTimeout(() => setSearchingValue(''), 1000)
@@ -234,5 +232,6 @@ const mapDispatchToProps = (dispatch) => {
         },
     }
 }
+const MemoizedShop = React.memo(Shop)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Shop)
+export default connect(mapStateToProps, mapDispatchToProps)(MemoizedShop)

@@ -17,6 +17,7 @@ import { bindDB } from '../../redux/midllewares/bindDB'
 import { GoCheckout } from '../Checkout/GoCheckout'
 import Login from '../Auth/Login'
 import { createDatabase } from '../../firebase/Firebase'
+import MemoizedShop from '../Shop/Shop'
 
 export const appHistory = createBrowserHistory()
 
@@ -41,7 +42,7 @@ class App extends React.Component {
                     <Nav />
                     <Switch>
                         <Route exact path='/' component={Homepage} />
-                        <Route path='/shop' component={() => <Shop />} />
+                        <Route path='/shop' component={MemoizedShop} />
                         <Route path='/basket' component={Basket} />
                         <Route path='/shoe/item/:id' component={ShoeCard} />
                         <Route path='/auth' component={AuthPage} />

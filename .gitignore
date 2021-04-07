@@ -36,3 +36,18 @@ api
 .nowignore
 .prettierrc.json
 package-lock.json
+npm
+firebase.json
+firestore.indexes.json
+firestore.rules
+.firebaserc
+.firebase
+package-lock.json
+.prettierrc.json
+.eslintcache
+et --hard 720ddd7
+database.rules.json
+public
+build
+.firebase
+.github

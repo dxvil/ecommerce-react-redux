@@ -50,5 +50,6 @@ database.rules.json
 public
 build
 .firebase
+/.firebase
 .github
 README.md

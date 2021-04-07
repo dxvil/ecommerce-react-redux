@@ -16,9 +16,7 @@ Firebase использована в качестве базы данных, в 
 `npm init`
 3. Запустить локальный сервер
 `npm start`
-<<<<<<< HEAD
- 
-=======
+
  
 Визуальное представление: 
 
@@ -27,4 +25,3 @@ Firebase использована в качестве базы данных, в 
 ![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/3.png)
 ![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/4.png)
 ![Image alt](https://github.com/dxvil/online-store/blob/master/presentation/5.png)
->>>>>>> ac54852ddc7eae6eb83c5361f7c54fdce1616729

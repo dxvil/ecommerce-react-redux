@@ -47,9 +47,9 @@ package-lock.json
 .eslintcache
 et --hard 720ddd7
 database.rules.json
-public
 build
 .firebase
 /.firebase
 .github
 README.md
+/.firebase/

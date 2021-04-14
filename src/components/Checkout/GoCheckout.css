@@ -14,7 +14,7 @@
 .delivery__data, .delivery__user {
     position: relative;
     border: 1px solid #FA8A07;
-    margin: 20px;
+    margin: 20px 20px 0 20px;
     padding: 20px;
     width: 30%;
     height: 50%;
@@ -67,4 +67,18 @@
 .delivery__confirm:hover{
     background-color: #FA3437;
     cursor: pointer;
+}
+
+.save-settings {
+    margin: -20px 0 20px 0;
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.save-settings .sg-custom {
+    background-color: #001133;
+    border: 1px solid #174690;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import { Input as inputUI } from "semantic-ui-react";
+import { Input as inputUI, Message } from "semantic-ui-react";
 import { email, maxLengthCreator, required } from "../../tools/validators";
+import { RenderInput } from "../SemanticUI/Input";
 
 class Auth extends Component {
   render() {
@@ -9,16 +10,19 @@ class Auth extends Component {
       <form className="auth__form">
         <label>Login: </label>
         <Field
-          component={inputUI}
+          component={RenderInput}
           placeholder="login"
           name="login"
+          fName="Login"
           type="text"
+          validate={required}
         />
         <label>Email: </label>
         <Field
-          component={inputUI}
+          component={RenderInput}
           placeholder="email"
           name="email"
+          fName="Email"
           validate={[required, email]}
           type="email"
           required
@@ -27,9 +31,10 @@ class Auth extends Component {
         <Field
           placeholder="password"
           name="password"
+          fName="Password"
           type="password"
           validate={required}
-          component={inputUI}
+          component={RenderInput}
         />
         <div
           className="ui submit button st-btn"

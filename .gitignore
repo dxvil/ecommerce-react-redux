@@ -42,14 +42,10 @@ firestore.indexes.json
 firestore.rules
 .firebaserc
 .firebase
-package-lock.json
-.prettierrc.json
-.eslintcache
 et --hard 720ddd7
 database.rules.json
-build
-.firebase
 /.firebase
 .github
 README.md
 /.firebase/
+storage.rules

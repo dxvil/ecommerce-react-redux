@@ -1,0 +1,10 @@
+.input__auth {
+    position: relative;
+}
+
+.input_invalid {
+    position: absolute;
+    width: 80%;
+    top: 15%;
+    left: 105%;
+}

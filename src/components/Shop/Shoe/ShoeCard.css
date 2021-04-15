@@ -55,6 +55,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 100%;
     width: 300px;
     height: 300px;
     background-color: #174690;
@@ -165,4 +166,71 @@
     position: absolute;
     top: 70px;
     left: 20%;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    .product-details {
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        height: fit-content;
+        width: 100%;
+        max-width: 100%;
+    }
+    .shoe-card__nav-btn {
+        margin-right: 0;
+    }
+    .product-details__view {
+        width: 100%;
+        max-width: 100%;
+    }
+    .product-details__more {
+        width: 100%;
+        max-width: 100%;
+    }
+    .product-details__header {
+        width: 100%;
+        margin: 15px 0;
+    }
+    .product-details__description {
+        width: 100%;
+        padding: 0 10px;
+        margin: 0 0 10px 0;
+    }
+   .product-details__img{
+       width: 80%;
+       align-self: center;
+       max-width: 100%;
+}
+    .product-details__sizes {
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: nowrap;
+    }
+    .sizes-header{
+        display: none;
+    }
+    .sizes-btn {
+        width: 50%;
+    }
+    .product-details__buttons {
+        width: 100%;
+        align-self: center;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    .shoe-btn{
+        width: 80px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 0 20px;
+    }
+    .product-details__price {
+        align-self: center;
+    }
+    .back-btn {
+        position: absolute;
+        top: 65px;
+        left: 0;
+    }
 }

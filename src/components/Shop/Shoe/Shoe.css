@@ -44,7 +44,7 @@
     z-index: -9;
     top: -10px;
     left: 50%;
-    margin-left: -25%;
+    transform: translate(-50%, 0);
     border: 5px solid #fff;
     width: 165px;
     height: 165px;

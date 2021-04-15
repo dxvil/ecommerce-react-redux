@@ -69,36 +69,60 @@
     width: 200px;
 }
 
-/*@media only screen and (min-device-width: 320px) and (max-device-width: 800px) {*/
-/*    .shop {*/
-/*         background: #001326;*/
-/*        width: 100%;*/
-/*        font-size: 18px;*/
-/*    }*/
-/*    .shop-header {*/
-/*        top: 10px;*/
-/*        max-width: 100%;*/
-/*        width: 100%;*/
-/*        height: 150px;*/
-/*    }*/
-/*    .shop-dropdown {*/
-/*        left: 0;*/
-/*        width: 80%;*/
-/*        top: -15px;*/
-/*    }*/
-/*    .shop-header__search-shoes {*/
-/*        max-width: 65%;*/
-/*        top: 50%;*/
-/*        right: unset;*/
-/*    }*/
-/*    .shop-header__title {*/
-/*        display: none;*/
-/*    }*/
-/*    .shop-undo-btn {*/
-/*        top: 30%;*/
-/*        right: 10px;*/
-/*    }*/
-/*    .shop-products {*/
-/*        top: 20px;*/
-/*    }*/
-/*}*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    .shop {
+         background: #001326;
+        width: 100%;
+        font-size: 18px;
+    }
+    .shop-header {
+        top: 10px;
+        max-width: 100%;
+        width: 100%;
+        height: 130px;
+    }
+    .shop-dropdown {
+        left: 0;
+        width: 80%;
+        top: -15px;
+    }
+    .shop-header__search-shoes {
+        max-width: 65%;
+        top: 50%;
+        right: unset;
+    }
+    .shop-header__title {
+        display: none;
+    }
+    .shop-undo-btn {
+        top: 30%;
+        right: 10px;
+    }
+    .shop .shop-products {
+        top: 20px;
+        max-width: 80%;
+    }
+    .shop .container-product {
+        max-width: 100%;
+    }
+    .container-product .product {
+        max-width: 100%;
+        margin: 10px 0;
+        height: 370px;
+    }
+    .product .shoe-back {
+        max-width: 100%;
+    }
+    .shoe-pic {
+        top: 30%;
+        width: 60%;
+    }
+    .shoe-title {
+        font-size: 20px;
+    }
+    .product-info-btn {
+        top: 10px;
+        width: 40px;
+        height: 40px;
+    }
+}

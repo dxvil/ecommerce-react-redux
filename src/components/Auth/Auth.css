@@ -48,3 +48,21 @@
 .auth__form .st-btn, .form-wrapper .st-btn{
     margin: 10px;
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    .auth-page {
+        height: auto;
+        padding: 5% 0;
+    }
+    .form-wrapper {
+        width: 80%;
+        max-width: 100%;
+        padding: 15% 0;
+        margin: 15px 0 0 0;
+    }
+    .input_invalid {
+        top: -5%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}

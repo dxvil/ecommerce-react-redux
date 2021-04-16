@@ -82,3 +82,18 @@
     background-color: #001133;
     border: 1px solid #174690;
 }
+
+.@media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    .delivery {
+        height: unset;
+        padding: 5% 0;
+        max-width: 100%;
+        flex-direction: column;
+    }
+    .delivery__data {
+        width: 100%;
+    }
+     .delivery__user {
+         width: 100%;
+     }
+}

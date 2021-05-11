@@ -55,32 +55,41 @@ const Shop = ({
   }, [products]);
 
   const searchRequest = (e) => {
-    setSearched(false);
+
     return setSearchingValue(e.target.value.toLowerCase());
   };
 
   const findAMatch = () => {
     let searchingValues;
-    if (!isSearched) {
-      searchingValues = list.filter((item) =>
-        item.key.toLowerCase().includes(searchingValue)
+
+    if (isSearched === true) {
+      searchingValues = filtered.filter((item) =>
+          item.key.toLowerCase().includes(searchingValue)
       );
       if (searchingValues.length === 0) {
         setNotFound(true);
         setTimeout(() => setSearchingValue(""), 1000);
         return setTimeout(() => setNotFound(false), 1500);
       }
-      setFoundSuccess(searchingValues);
-    } else if (isSearched) {
-      searchingValues = filtered.filter((item) =>
+      return setFoundSuccess(searchingValues);
+    }
+
+    if (!isSearched) {
+      searchingValues = list.filter((item) =>
         item.key.toLowerCase().includes(searchingValue)
       );
-      return setFoundSuccess(searchingValues);
+      setFoundSuccess(searchingValues);
+    }
+
+    if (searchingValues.length === 0) {
+      setNotFound(true);
+      setTimeout(() => setSearchingValue(""), 1000);
+      return setTimeout(() => setNotFound(false), 1500);
     }
   };
 
   const renderSearchResults = () => {
-    if (foundSuccess && !isSearched) {
+    if (foundSuccess && isSearched) {
       foundSuccess.map((item) => {
         return (
           <Shoe
@@ -99,6 +108,10 @@ const Shop = ({
     }
   };
 
+  const resetResearch = () => {
+    return setSearched(false)
+  }
+
   useEffect(() => {
     if (searchingValue && searchingValue.length > 0) {
       findAMatch();
@@ -107,6 +120,7 @@ const Shop = ({
   }, [searchingValue]);
 
   const dropDownFiltering = (e) => {
+
     const filterComponent = (item) => {
       return (
         <Shoe
@@ -121,62 +135,63 @@ const Shop = ({
       );
     };
 
-    switch (e.target.value) {
-      case "alphabet":
-        setSearched(true);
-        filterShopByAlphabet(true);
-        let filterByAlph = products
-          .sort((i, b) => (i.item.title > b.item.title ? 1 : -1))
-          .map((item) => {
-            return filterComponent(item);
-          });
-        setFiltered(filterByAlph);
-        break;
-      case "reverse":
-        setSearched(true);
-        filterShopReverse(true);
-        let filterByReverseAlph = products
-          .sort((i, b) => (i.item.title < b.item.title ? 1 : -1))
-          .map((item) => {
-            return filterComponent(item);
-          });
-        setFiltered(filterByReverseAlph);
-        break;
-      case "low":
-        setSearched(true);
-        filterShopByLowPrice(true);
-        let filterByLowPrice = products
-          .sort(function (a, b) {
-            let firstValue = parseInt(a.item.price),
-              secondValue = parseInt(b.item.price);
-            return firstValue - secondValue;
-          })
-          .map((item) => {
-            return filterComponent(item);
-          });
-        setFiltered(filterByLowPrice);
-        break;
-      case "high":
-        setSearched(true);
-        filterShopByHighPrice(true);
-        let filterByHighPrice = products
-          .sort(function (a, b) {
-            let firstValue = parseInt(a.item.price),
-              secondValue = parseInt(b.item.price);
-            return secondValue - firstValue;
-          })
-          .map((item) => {
-            return filterComponent(item);
-          });
-        setFiltered(filterByHighPrice);
-        break;
-      case "default":
-        filterShopByHighPrice(false);
-        filterShopReverse(false);
-        filterShopByAlphabet(false);
-        filterShopByLowPrice(false);
-        return setSearched(false);
-    }
+      switch (e.target.value) {
+        case "alphabet":
+          setSearched(true);
+          filterShopByAlphabet(true);
+          let filterByAlph = products
+              .sort((i, b) => (i.item.title > b.item.title ? 1 : -1))
+              .map((item) => {
+                return filterComponent(item);
+              });
+          setFiltered(filterByAlph);
+          break;
+        case "reverse":
+          setSearched(true);
+          filterShopReverse(true);
+          let filterByReverseAlph = products
+              .sort((i, b) => (i.item.title < b.item.title ? 1 : -1))
+              .map((item) => {
+                return filterComponent(item);
+              });
+          setFiltered(filterByReverseAlph);
+          break;
+        case "low":
+          setSearched(true);
+          filterShopByLowPrice(true);
+          let filterByLowPrice = products
+              .sort(function (a, b) {
+                let firstValue = parseInt(a.item.price),
+                    secondValue = parseInt(b.item.price);
+                return firstValue - secondValue;
+              })
+              .map((item) => {
+                return filterComponent(item);
+              });
+          setFiltered(filterByLowPrice);
+          break;
+        case "high":
+          setSearched(true);
+          filterShopByHighPrice(true);
+          let filterByHighPrice = products
+              .sort(function (a, b) {
+                let firstValue = parseInt(a.item.price),
+                    secondValue = parseInt(b.item.price);
+                return secondValue - firstValue;
+              })
+              .map((item) => {
+                return filterComponent(item);
+              });
+          setFiltered(filterByHighPrice);
+          break;
+        case "default":
+          filterShopByHighPrice(false);
+          filterShopReverse(false);
+          filterShopByAlphabet(false);
+          filterShopByLowPrice(false);
+          return setSearched(false);
+      }
+
   };
 
   const renderByConditions = () => {
@@ -198,7 +213,7 @@ const Shop = ({
         <h2 className="shop-header__title">Shop</h2>
         <button
           className="circular ui icon button shop-undo-btn"
-          onClick={() => setSearched(false)}
+          onClick={() => resetResearch()}
         >
           <i className="icon undo" />
         </button>

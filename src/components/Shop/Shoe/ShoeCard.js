@@ -27,114 +27,108 @@ class ShoeCard extends React.Component {
         }
     }
 
-    componentDidMount() {
-        //loader
-        if (this.props.items.length !== 0) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.items.length !== prevProps.items.length) {
             this.setState({
-                loaded: true,
+                items: this.props.items
             })
         }
     }
 
     renderI = () => {
-        let id = this.state.itemId,
-            item = this.state.items.find((i) => i.item.id === id),
-            renderingItem = item.item
+        if(this.state.items.length !== 0) {
+            let id = this.state.itemId,
+                item = this.state.items.find((i) => i.item.id === id),
+                renderingItem = item.item
 
-        return (
-            <div className='product-details'>
-                <div className='product-details__header'>
-                    <h1>{renderingItem.title}</h1>
-                    <p className='product-details__description'>
-                        Description. Shoe. Description. Shoe. Lorem ipsum dolor
-                        sit amet. Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit. Autem, qui.
-                    </p>
-                </div>
-
-                <div className='product-details__view'>
-                    <div className='product-details__img'>
-                        <img src={renderingItem.image}  alt='shoe'/>
+            return (
+                <div className='product-details'>
+                    <div className='product-details__header'>
+                        <h1>{renderingItem.title}</h1>
+                        <p className='product-details__description'>
+                            Description. Shoe. Description. Shoe. Lorem ipsum dolor
+                            sit amet. Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit. Autem, qui.
+                        </p>
                     </div>
-                </div>
-                <div className='product-details__more'>
-                    <div className='product-details__sizes'>
-                        <p className='sizes-header'>Sizes:</p>
-                        <div
-                            className='sizes-btn'
-                            onClick={() =>
-                                this.sizeHandler(this.state.sizes.tS)
-                            }
-                        >
-                            {this.state.sizes.tS}
-                        </div>
-                        <div
-                            className='sizes-btn'
-                            onClick={() =>
-                                this.sizeHandler(this.state.sizes.tE)
-                            }
-                        >
-                            {this.state.sizes.tE}
-                        </div>
-                        <div
-                            className='sizes-btn'
-                            onClick={() =>
-                                this.sizeHandler(this.state.sizes.tN)
-                            }
-                        >
-                            {this.state.sizes.tN}
-                        </div>
-                        <div
-                            className='sizes-btn'
-                            onClick={() => this.sizeHandler(this.state.sizes.f)}
-                        >
-                            {this.state.sizes.f}
-                        </div>
-                        <div
-                            className='sizes-btn'
-                            onClick={() =>
-                                this.sizeHandler(this.state.sizes.fO)
-                            }
-                        >
-                            {this.state.sizes.fO}
-                        </div>
-                        <div
-                            className='sizes-btn'
-                            onClick={() =>
-                                this.sizeHandler(this.state.sizes.fT)
-                            }
-                        >
-                            {this.state.sizes.fT}
+
+                    <div className='product-details__view'>
+                        <div className='product-details__img'>
+                            <img src={renderingItem.image} alt='shoe'/>
                         </div>
                     </div>
-                    <div className='product-details__buttons'>
-                        <button
-                            className='shoe-btn buy-btn'
-                            onClick={(e) => this.sizeReduxHandler(e)}
-                        >
-                            +
-                        </button>
-                        <button
-                            className='shoe-btn remove-btn'
-                            onClick={(e) => this.sizeReduxRemover(e)}
-                        >
-                            <i className='icon trash'></i>
-                        </button>
+                    <div className='product-details__more'>
+                        <div className='product-details__sizes'>
+                            <p className='sizes-header'>Sizes:</p>
+                            <div
+                                className='sizes-btn'
+                                onClick={() =>
+                                    this.sizeHandler(this.state.sizes.tS)
+                                }
+                            >
+                                {this.state.sizes.tS}
+                            </div>
+                            <div
+                                className='sizes-btn'
+                                onClick={() =>
+                                    this.sizeHandler(this.state.sizes.tE)
+                                }
+                            >
+                                {this.state.sizes.tE}
+                            </div>
+                            <div
+                                className='sizes-btn'
+                                onClick={() =>
+                                    this.sizeHandler(this.state.sizes.tN)
+                                }
+                            >
+                                {this.state.sizes.tN}
+                            </div>
+                            <div
+                                className='sizes-btn'
+                                onClick={() => this.sizeHandler(this.state.sizes.f)}
+                            >
+                                {this.state.sizes.f}
+                            </div>
+                            <div
+                                className='sizes-btn'
+                                onClick={() =>
+                                    this.sizeHandler(this.state.sizes.fO)
+                                }
+                            >
+                                {this.state.sizes.fO}
+                            </div>
+                            <div
+                                className='sizes-btn'
+                                onClick={() =>
+                                    this.sizeHandler(this.state.sizes.fT)
+                                }
+                            >
+                                {this.state.sizes.fT}
+                            </div>
+                        </div>
+                        <div className='product-details__buttons'>
+                            <button
+                                className='shoe-btn buy-btn'
+                                onClick={(e) => this.sizeReduxHandler(e)}
+                            >
+                                +
+                            </button>
+                            <button
+                                className='shoe-btn remove-btn'
+                                onClick={(e) => this.sizeReduxRemover(e)}
+                            >
+                                <i className='icon trash'></i>
+                            </button>
+                        </div>
+                        {alert === true ? <div>Alert</div> : null}
+                        <p className='product-details__price'>
+                            {renderingItem.price}
+                        </p>
                     </div>
-                    {alert === true ? <div>Alert</div> : null}
-                    <p className='product-details__price'>
-                        {renderingItem.price}
-                    </p>
                 </div>
-            </div>
-        )
-    }
-
-    conditionalRendering = () => {
-        if (this.state.loaded) {
-            return this.renderI()
+            )
         }
-        return <LoaderText />
     }
 
     changeItemToPrevious = () => {
@@ -238,7 +232,7 @@ class ShoeCard extends React.Component {
                         Back to Shop
                     </button>
                 </Link>
-                {this.conditionalRendering()}
+                {this.state.items.length === 0 ? <LoaderText /> : this.renderI()}
             </div>
         )
     }

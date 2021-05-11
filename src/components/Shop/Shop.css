@@ -69,6 +69,10 @@
     width: 200px;
 }
 
+.store-loader{
+    height: 100vh;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
     .shop {
          background: #001326;
@@ -126,3 +130,4 @@
         height: 40px;
     }
 }
+

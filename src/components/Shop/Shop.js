@@ -21,13 +21,16 @@ const Shop = ({
   filterShopByHighPrice,
 }) => {
   const [products, setProducts] = useState(items);
-  const [fetched, setFetched] = useState(false);
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [searchingValue, setSearchingValue] = useState("");
   const [isSearched, setSearched] = useState(false);
   const [foundSuccess, setFoundSuccess] = useState(null);
   const [notFound, setNotFound] = useState(null);
+
+    useEffect(() => {
+     setProducts(items);
+    }, [items]);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -48,9 +51,8 @@ const Shop = ({
         });
 
       setList(renderedItems);
-      setFetched(true);
     }
-  }, [fetched]);
+  }, [products]);
 
   const searchRequest = (e) => {
     setSearched(false);
@@ -178,9 +180,9 @@ const Shop = ({
   };
 
   const renderByConditions = () => {
-    if (products.length < 1) {
-      return <LoaderText />;
-    }
+      if(products.length === 0) {
+          return <LoaderText />
+      }
 
     if (notFound) {
       return <Message negative>The product is not found.</Message>;

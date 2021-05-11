@@ -38,8 +38,8 @@ class ShoeCard extends React.Component {
 
     renderI = () => {
         let id = this.state.itemId,
-            item = this.state.items.find((i) => i.item.id === id)
-        let renderingItem = item.item
+            item = this.state.items.find((i) => i.item.id === id),
+            renderingItem = item.item
 
         return (
             <div className='product-details'>
@@ -54,7 +54,7 @@ class ShoeCard extends React.Component {
 
                 <div className='product-details__view'>
                     <div className='product-details__img'>
-                        <img src={renderingItem.image} />
+                        <img src={renderingItem.image}  alt='shoe'/>
                     </div>
                 </div>
                 <div className='product-details__more'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
 
 const LoaderText = () => (
-    <div>
+    <div className="store-loader">
         <Dimmer active>
             <Loader>Loading</Loader>
         </Dimmer>

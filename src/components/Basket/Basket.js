@@ -15,7 +15,10 @@ function Basket(props) {
         if (basket.length > 0) {
             setTotalPrice(totalSum(basket))
         }
-    }, [basket])
+
+        setBasket(props.products)
+
+    }, [props.products])
 
     useEffect(() => {
         if (itemToDelete) {
@@ -27,7 +30,7 @@ function Basket(props) {
         return order.map((item) => {
             return (
                 <div key={item.title} className='basket__product'>
-                    <i className='close icon' />
+                    <button className='close-btn' onClick={(e) => setItemToDelete(item)}><i className='close icon' /></button>
                     <img src={item.image} alt={item.title} />
                     <div className='info-wrapper'>
                         <p className='basket__product-info'>{item.title}</p>

@@ -8,7 +8,7 @@ export let purchaseReducer = (state = [], { payload, type }) => {
             let newState = state.filter((item) => item.id !== payload.id)
 
             if (existedItem) {
-                item.quantity = existedItem.quantity + 1
+                item.quantity++
 
                 return [...newState, item]
             } else {
@@ -16,9 +16,13 @@ export let purchaseReducer = (state = [], { payload, type }) => {
             }
 
         case REMOVE_ITEM:
-            return state.filter((item) => item.id !== payload)
+            switch (typeof payload) {
+                case "number":
+                    return state.filter((item) => item.id !== payload)
+                default:
+                    return state.filter((item) => item !== payload)
+            }
+        }
 
-        default:
             return state
-    }
 }

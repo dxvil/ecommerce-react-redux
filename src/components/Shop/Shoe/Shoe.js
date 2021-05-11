@@ -6,7 +6,9 @@ import { addItem } from '../../../redux/actions'
 const Shoe = ({ title, price, img, id, addItem, prod }) => {
     const buyShoe = () => {
         let shoe = prod.find((item) => item.item.id === id)
-        shoe.item.size = [...shoe.item.size, 37]
+        if(shoe.item.size.length === 0) {
+            shoe.item.size = [...shoe.item.size, 37]
+        }
         addItem(shoe.item)
     }
 

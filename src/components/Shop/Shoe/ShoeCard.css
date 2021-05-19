@@ -6,7 +6,8 @@
     width: 100%;
     height: 100vh;
     background: #000 url("../../../images/home.png") no-repeat;
-    background-size: 100%;
+    background-color: #001326;
+    background-size: cover;
     color: #fff;
 }
 
@@ -16,7 +17,6 @@
     color: #000;
     width: 70%;
     height: 70%;
-    background-color: #C0C0C0;
     border-radius: 50px;
 }
 .product-details__header, .product-details__view {
@@ -169,11 +169,18 @@
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    .details {
+        height: unset;
+    }
     .product-details {
         text-align: center;
         flex-direction: column;
         justify-content: center;
+        min-height: -webkit-fit-content;
+        min-height: -moz-fit-content;
         min-height: fit-content;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
         height: fit-content;
         width: 100%;
         max-width: 100%;
@@ -222,6 +229,11 @@
         align-self: center;
         justify-content: center;
         margin: 10px 0;
+    }
+    .product-details__img {
+        height: unset;
+        box-shadow: none;
+        background-color: inherit;
     }
     .shoe-btn{
         width: 80px;

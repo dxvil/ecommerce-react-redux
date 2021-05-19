@@ -211,7 +211,7 @@ class ShoeCard extends React.Component {
             <div className='details'>
                 <p className='details-header'>Product Details</p>
                 <div className='shoe-card__nav-btn'>
-                    <button
+                    <button 
                         onClick={() => this.changeItemToPrevious()}
                         className='ui left attached button secondary'
                     >

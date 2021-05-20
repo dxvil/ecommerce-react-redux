@@ -133,7 +133,8 @@ class ShoeCard extends React.Component {
 
     changeItemToPrevious = () => {
         if (this.state.itemId !== 1) {
-            appHistory.push(`/shoe/item/${this.state.itemId - 1}`)
+            const url = `${this.state.itemId - 1}`
+            appHistory.replace(url)
             this.setState((prevState) => ({
                 itemId: prevState.itemId - 1,
             }))
@@ -152,7 +153,8 @@ class ShoeCard extends React.Component {
 
     changeItemToNext = () => {
         if (this.state.itemId !== 10) {
-            appHistory.push(`/shoe/item/${this.state.itemId + 1}`)
+            const url = `${this.state.itemId + 1}`
+            appHistory.replace(url)
             this.setState((prevState) => ({
                 itemId: prevState.itemId + 1,
             }))
@@ -169,8 +171,8 @@ class ShoeCard extends React.Component {
         }
     }
 
-    refreshRoute = () => {
-        appHistory.push({ pathname: '/' })
+    refreshRoute = (route) => {
+        appHistory.replace({ pathname: '/' })
     }
 
     sizeHandler = (s) => {

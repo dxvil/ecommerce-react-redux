@@ -77,17 +77,17 @@ const setUserPassword = (pass) => {
         })
 }
 
-const loginAccount = (em, pass) => {
+export const loginAccount = (em, pass) => {
     firebase
         .auth()
         .signInWithEmailAndPassword(em, pass)
         .then((userCredential) => {
-            // Signed in
             var user = userCredential.user
-            // ...
+            return em
         })
         .catch((error) => {
             var errorCode = error.code
             var errorMessage = error.message
+            console.log(error.message)
         })
 }

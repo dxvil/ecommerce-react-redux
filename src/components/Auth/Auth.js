@@ -38,7 +38,7 @@ class Auth extends Component {
         />
         <div
           className="ui submit button st-btn"
-          onClick={this.props.onHandleSubmit}
+          onClick={this.props.onHandleRegistration}
         >
           Submit
         </div>

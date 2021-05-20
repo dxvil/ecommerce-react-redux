@@ -9,6 +9,7 @@ export const FILTER_SHOP_LOW_TO_HIGH = 'FILTER_SHOP_LOW_TO_HIGH'
 export const FILTER_SHOP_HIGH_TO_LOW = 'FILTER_SHOP_HIGH_TO_LOW'
 export const CREATE_USER_ACCOUNT = 'CREATE_USER_ACCOUNT'
 export const SET_USER_NAME = 'SET_USER_NAME'
+export const LOGIN = 'LOGIN';
 
 export function initFirebaseStore(boolean) {
     return {
@@ -78,6 +79,13 @@ export function createUserAccount(payload) {
         type: CREATE_USER_ACCOUNT,
         payload: payload,
     }
+}
+
+export function login(payload) {
+return {
+    type: LOGIN,
+    payload
+}
 }
 
 export function setUserName(name) {

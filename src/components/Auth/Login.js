@@ -1,9 +1,15 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { email, required } from "../../tools/validators";
+import React, {useState} from "react";
+import {Field, formValueSelector, reduxForm} from "redux-form";
+import {email, minLength, required} from "../../tools/validators";
 import { RenderInput } from "../SemanticUI/Input";
+import {loginAcc} from "../../redux/midllewares/loginAcc";
+import {connect} from "react-redux";
 
 let Login = (props) => {
+
+const onHandleLogin = async () => {
+  const result = await props.dispatch(loginAcc(props.email, props.password))
+}
   return (
     <div className="auth-page">
       <div className="form-wrapper">
@@ -22,11 +28,11 @@ let Login = (props) => {
             placeholder="password"
             name="password"
             type="password"
-            validate={required}
+            validate={[required, minLength]}
             component={RenderInput}
           />
           <div
-            onClick={props.onHandleSubmit}
+            onClick={onHandleLogin}
             className="ui submit button st-btn"
           >
             Submit
@@ -37,6 +43,20 @@ let Login = (props) => {
   );
 };
 
-const UserLogin = reduxForm({ form: "login" })(Login);
+
+
+
+let UserLogin = reduxForm({ form: "login" })(Login);
+
+const selector = formValueSelector('login')
+
+UserLogin = connect(state => {
+const email = selector(state, 'email')
+  const password = selector(state, 'password')
+  const login = selector(state, state.login)
+  return {
+  email, password, login
+  }
+})(UserLogin)
 
 export default UserLogin;

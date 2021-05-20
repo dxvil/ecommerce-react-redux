@@ -20,6 +20,7 @@ const Shop = ({
   filterShopByLowPrice,
   filterShopByHighPrice,
 }) => {
+  const initialProducts = useState(items);
   const [products, setProducts] = useState(items);
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -55,36 +56,36 @@ const Shop = ({
   }, [products]);
 
   const searchRequest = (e) => {
-
     return setSearchingValue(e.target.value.toLowerCase());
   };
 
   const findAMatch = () => {
-    let searchingValues;
-
-    if (isSearched === true) {
-      searchingValues = filtered.filter((item) =>
-          item.key.toLowerCase().includes(searchingValue)
-      );
-      if (searchingValues.length === 0) {
-        setNotFound(true);
-        setTimeout(() => setSearchingValue(""), 1000);
-        return setTimeout(() => setNotFound(false), 1500);
-      }
-      return setFoundSuccess(searchingValues);
-    }
+    let value;
 
     if (!isSearched) {
-      searchingValues = list.filter((item) =>
-        item.key.toLowerCase().includes(searchingValue)
+      value = list.filter((item) =>
+          item.key.toLowerCase().includes(searchingValue)
       );
-      setFoundSuccess(searchingValues);
+      setFoundSuccess(value);
+      setSearched(true);
     }
 
-    if (searchingValues.length === 0) {
+    if (isSearched === true) {
+      value = filtered.filter((item) =>
+          item.key.toLowerCase().includes(searchingValue)
+      );
+      if (value.length === 0) {
+        setNotFound(true);
+        setTimeout(() => setSearchingValue(""), 1500);
+        return setTimeout(() => setNotFound(false), 2000);
+      }
+      return setFoundSuccess(value);
+    }
+
+    if (value.length === 0) {
       setNotFound(true);
-      setTimeout(() => setSearchingValue(""), 1000);
-      return setTimeout(() => setNotFound(false), 1500);
+      setTimeout(() => setSearchingValue(""), 1500);
+      return setTimeout(() => setNotFound(false), 2000);
     }
   };
 

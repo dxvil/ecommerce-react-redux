@@ -37,6 +37,22 @@ export const createDatabase = (path, item) => {
         })
 }
 
+export const addPurchase = (path, name, info) => {
+    db.collection(path)
+        .add(
+           info
+        )
+        .then(function (docRef) {
+            return docRef
+        })
+        .then((data) => {
+            return data
+        })
+        .catch(function (error) {
+            throw new Error(error)
+        })
+}
+
 export const bindingData = (path) => {
     return db
         .collection(path)

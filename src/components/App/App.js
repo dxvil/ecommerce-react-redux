@@ -14,7 +14,7 @@ import AuthPage from '../Auth/AuthPage'
 
 import { createDBMiddleware } from '../../redux/midllewares/createDBMiddleware'
 import { bindDB } from '../../redux/midllewares/bindDB'
-import { GoCheckout } from '../Checkout/GoCheckout'
+import GoCheckout from '../Checkout/GoCheckout'
 import Login from '../Auth/Login'
 import { createDatabase } from '../../firebase/Firebase'
 import MemoizedShop from '../Shop/Shop'

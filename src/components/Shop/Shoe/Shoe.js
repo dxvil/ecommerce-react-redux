@@ -41,7 +41,6 @@ const Shoe = ({ title, price, img, id, addItem, prod }) => {
                     className='shoe-pic'
                     alt={title}
                     src={img}
-                    loading='lazy'
                 />
                 <p className='shoe-title'>{title}</p>
                 <p className='shoe-price'>{price}</p>
